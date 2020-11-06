@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta charset="utf-8" />
+    <meta name="description" content="Fill Me In" />
+    <meta name="author" content="John Doe" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+      integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
+      crossorigin="anonymous"
+    />
+    <title>Derrick Bills Todo</title>
+
+    <link href="css/styles.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <header>
+      <H1>Recipe Page</H1>
+    </header>
+    <div class="container" id="container">
+      <form class="form" id="myForm">
+        <div class="addTask">
+          <input
+            id="todo-input"
+            name="todo-input"
+            type="text"
+            placeholder="Add Todo"
+          />
+          <input
+            id="category-input"
+            name="category-input"
+            type="text"
+            placeholder="Category"
+          />
+          <button id="add-button" class="fas fa-plus icon"></button>
+        </div>
+      </form>
+
+      <div class="holder title1"><h3></h3></div>
+      <ol class="notCompleted"></ol>
+      <div class="holder title2"><h3></h3></div>
+
+      <button id="reset" class="fas fa-trash-restore-alt icon">
+        Delete Completed
+      </button>
+      <ol class="Completed"></ol>
+    </div>
+    <div class="container right">
+      <div class="holder title3"><h3></h3></div>
+      <ol class="Categories"></ol>
+    </div>
+  </body>
+  <script defer src="./js/index.js"></script>
+</html>

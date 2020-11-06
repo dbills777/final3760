@@ -5,12 +5,12 @@
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,300;0,700;1,300&display=swap");
 html {
   line-height: 1.15;
   /* 1 */
   -webkit-text-size-adjust: 100%;
   /* 2 */
-  font-size: 100%;
 }
 
 /* Sections
@@ -188,9 +188,9 @@ select {
  * Correct the inability to style clickable types in iOS and Safari.
  */
 button,
-[type="button"],
-[type="reset"],
-[type="submit"] {
+[type='button'],
+[type='reset'],
+[type='submit'] {
   -webkit-appearance: button;
 }
 
@@ -198,9 +198,9 @@ button,
  * Remove the inner border and padding in Firefox.
  */
 button::-moz-focus-inner,
-[type="button"]::-moz-focus-inner,
-[type="reset"]::-moz-focus-inner,
-[type="submit"]::-moz-focus-inner {
+[type='button']::-moz-focus-inner,
+[type='reset']::-moz-focus-inner,
+[type='submit']::-moz-focus-inner {
   border-style: none;
   padding: 0;
 }
@@ -209,9 +209,9 @@ button::-moz-focus-inner,
  * Restore the focus styles unset by the previous rule.
  */
 button:-moz-focusring,
-[type="button"]:-moz-focusring,
-[type="reset"]:-moz-focusring,
-[type="submit"]:-moz-focusring {
+[type='button']:-moz-focusring,
+[type='reset']:-moz-focusring,
+[type='submit']:-moz-focusring {
   outline: 1px dotted ButtonText;
 }
 
@@ -261,8 +261,8 @@ textarea {
  * 1. Add the correct box sizing in IE 10.
  * 2. Remove the padding in IE 10.
  */
-[type="checkbox"],
-[type="radio"] {
+[type='checkbox'],
+[type='radio'] {
   box-sizing: border-box;
   /* 1 */
   padding: 0;
@@ -272,8 +272,8 @@ textarea {
 /**
  * Correct the cursor style of increment and decrement buttons in Chrome.
  */
-[type="number"]::-webkit-inner-spin-button,
-[type="number"]::-webkit-outer-spin-button {
+[type='number']::-webkit-inner-spin-button,
+[type='number']::-webkit-outer-spin-button {
   height: auto;
 }
 
@@ -281,7 +281,7 @@ textarea {
  * 1. Correct the odd appearance in Chrome and Safari.
  * 2. Correct the outline style in Safari.
  */
-[type="search"] {
+[type='search'] {
   -webkit-appearance: textfield;
   /* 1 */
   outline-offset: -2px;
@@ -291,7 +291,7 @@ textarea {
 /**
  * Remove the inner padding in Chrome and Safari on macOS.
  */
-[type="search"]::-webkit-search-decoration {
+[type='search']::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
@@ -339,132 +339,216 @@ template {
 }
 
 body {
-  height: 100%;
-  background-color: #3a3a3a;
-}
-
-h1 {
-  font-size: 3rem;
-  font-weight: 50;
-  margin: 1rem 0 3rem;
-  text-align: center;
-  color: #fff;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
-.styling {
-  font-weight: 800;
-  color: black;
-}
-
-.input_div {
+  margin-top: 4rem;
   display: flex;
   justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.input_div .input {
-  padding: 0.5rem 1rem;
-  height: 50px;
-  outline: none;
-  background-color: #fff;
-  width: 450px;
-  font-size: 1.2rem;
-  margin: 0.25rem;
-  border-radius: 25px;
-}
-
-.addButton {
-  height: 50px;
-  width: 50px;
-  border-radius: 25px;
-  outline: none;
-  border: none;
-  background-color: #fff;
-  color: #fff;
-  margin: 0.25px;
-  background-color: lime;
-  cursor: pointer;
-}
-
-.addButton:hover {
-  opacity: 0.7;
+  height: 100vh;
+  background-color: #4e5d6a;
+  font-family: 'Open Sans Condensed', sans-serif;
+  margin: 0 auto;
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  min-width: 500px;
+  max-width: 60vw;
+  padding: 10px;
+  margin-right: 0;
+  padding-top: 10rem;
+}
+
+.right {
+  display: flex;
+  min-width: 500px;
+  max-width: 600px;
+  padding-top: 20rem;
+  margin-left: 0;
+  padding-left: 0;
   align-items: center;
-  text-align: center;
-  margin-top: 2rem;
 }
 
-.item {
-  padding: 0;
-  margin-bottom: 1.5rem;
-  border-bottom: 4px solid #5c5c5c;
+.addTask {
+  width: 100%;
+  display: flex;
 }
 
-.item_input {
-  padding: 0;
-  margin: 0;
-  background: none;
-  outline: none;
-  color: #fff;
+.addTask > input[type='text'] {
+  width: 100%;
+  color: #333333;
   border: none;
-  width: 350px;
-  font-size: 1.4rem;
+  border-bottom: 2px solid gray;
+  background: none;
+  padding: 2rem;
+  margin-right: 2rem;
+  font-size: 1rem;
+  outline: none;
+}
+
+.addTask button {
+  margin: 10px;
+  background: #9ea69d;
+  color: #fcfcfc;
+  font-size: 1rem;
+  text-transform: uppercase;
+  padding: 10px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#reset {
+  margin: 10px;
+  background: #9ea69d;
+  color: #fcfcfc;
+  font-size: 1rem;
+  text-transform: uppercase;
+  padding: 10px;
+  width: 40rem;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#delete {
+  margin: 10px;
+  background: #9ea69d;
+  color: #fcfcfc;
+  font-size: 1rem;
+  text-transform: uppercase;
+  padding: 10px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.notCompleted,
+.Completed,
+.Categories {
+  min-width: 600px;
+  max-width: 100%;
+  margin-right: 15rem;
+}
+
+h3,
+.holder {
+  font-size: 1rem;
+  text-transform: uppercase;
+  margin: 0 auto;
+  margin-top: 10px;
+  color: #fff;
+}
+
+ol {
+  list-style: none;
+}
+
+ol li {
+  color: white;
+  font-weight: 800;
+  width: 100%;
+  padding: 20px;
+  margin: 5px 0;
+  font-size: 1rem;
+  border-radius: 15px;
+}
+
+ol li .btn {
+  float: right;
+  padding: 5px;
+  font-size: 1rem;
+  margin-right: 15px;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+ol li .btn:hover {
+  background-color: white;
+  border-radius: 10px;
+  color: black;
+}
+
+ol.Completed li {
+  background-color: #7bed8d;
+  border: 1px solid black;
+  text-decoration: line-through;
+  text-decoration-color: rgba(3, 3, 3, 0.527);
+  color: #748a9d;
+  box-shadow: 4px 6px 5px -2px rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+}
+
+ol.Completed li:hover {
+  transform: scale(1.05);
+  font-size: 2rem;
+}
+
+ol.Categories li {
+  background-color: #fe5e5e;
+  border: 1px solid black;
+  box-shadow: 4px 6px 5px -2px rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+}
+
+ol.Categories li:hover {
+  transform: scale(1.05);
+  font-size: 2rem;
+}
+
+ol.notCompleted li {
+  background-color: #a6bcd0;
+  border: 1px solid black;
+  box-shadow: 4px 6px 5px -2px rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+}
+
+ol.notCompleted li:hover {
+  transform: scale(1.1);
+  font-size: 2rem;
+}
+
+.checkStyle {
+  margin-left: 1rem;
+  color: rgba(255, 255, 255, 0.39);
 }
 
 .strike {
   text-decoration: line-through;
+  text-decoration-color: rgba(255, 255, 255, 0.37);
 }
 
-.editButton {
-  height: 50px;
-  width: 50px;
-  border-radius: 25px;
-  outline: none;
-  border: none;
-  background-color: #fff;
-  color: #fff;
-  margin-bottom: 0;
-  background-color: #0099ff;
-  cursor: pointer;
-  margin: 0.5rem;
+.capital {
+  text-transform: capitalize;
 }
 
-.removeButton {
-  height: 50px;
-  width: 50px;
-  border-radius: 25px;
-  outline: none;
-  border: none;
-  background-color: #fff;
-  color: #fff;
-  margin-bottom: 0;
-  background-color: #ff2a2a;
-  cursor: pointer;
-  /* font-size: 1.4rem;
-  margin: 0 0.75rem;
-  background: none;
-  outline: none;
-  color: #e00;
-  border: none; */
+.category-list {
+  font-size: 1rem;
+  padding-right: 5rem;
+  color: #565656;
+  text-transform: capitalize;
 }
 
-.checkbox {
-  left: 2px;
-  width: 27px;
-  height: 27px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #B3B3B3 #dcddde #dcddde #B3B3B3;
-  content: "";
-  background-image: linear-gradient(135deg, #B1B6BE 0%, #FFF 100%);
-  background-repeat: no-repeat;
-  background-position: center;
+.itemHover:hover {
+  font-size: 3rem;
+}
+
+.black {
+  color: black;
+}
+
+#add-button,
+#reset {
+  background-color: transparent;
+}
+
+#add-button:hover,
+#reset:hover {
+  transform: scale(1.05);
+  color: red;
 }
 /*# sourceMappingURL=styles.css.map */
