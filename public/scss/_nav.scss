@@ -1,0 +1,10 @@
+nav{
+    color: $base-color;
+    display: flex;
+    justify-content: space-around;
+    width: 100vw;
+    background-color: $nav-background;
+}
+h1{
+    cursor: pointer;
+}

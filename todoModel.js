@@ -1,12 +1,13 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-const TodoSchema = new mongoose.Schema({
-  todo: String,
+const RecipeSchema = new mongoose.Schema({
+  recipe: String,
   complete: Boolean,
   cat: String,
+  ingredients: Array,
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Category',
   },
 });
-module.exports = mongoose.model('Todo',TodoSchema)
+module.exports = mongoose.model('Rec', RecipeSchema);

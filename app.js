@@ -23,7 +23,7 @@ mongoose
   .catch((err) => console.log(err));
 
 app.post('/addtodo', (req, res) => {
-  console.log(req.body);
+  console.log("dsfafkdjf;",req.body);
   Todo.create(
     {
       todo: req.body.todo,

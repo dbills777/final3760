@@ -1,3 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,300;0,700;1,300&display=swap");
+.header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
@@ -5,7 +12,6 @@
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,300;0,700;1,300&display=swap");
 html {
   line-height: 1.15;
   /* 1 */
@@ -340,10 +346,9 @@ template {
 
 body {
   margin-top: 4rem;
-  display: flex;
   justify-content: center;
   height: 100vh;
-  background-color: #4e5d6a;
+  background-color: #4E5D6A;
   font-family: 'Open Sans Condensed', sans-serif;
   margin: 0 auto;
 }
@@ -351,21 +356,11 @@ body {
 .container {
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   min-width: 500px;
   max-width: 60vw;
   padding: 10px;
   margin-right: 0;
-  padding-top: 10rem;
-}
-
-.right {
-  display: flex;
-  min-width: 500px;
-  max-width: 600px;
-  padding-top: 20rem;
-  margin-left: 0;
-  padding-left: 0;
-  align-items: center;
 }
 
 .addTask {
@@ -550,5 +545,17 @@ ol.notCompleted li:hover {
 #reset:hover {
   transform: scale(1.05);
   color: red;
+}
+
+nav {
+  color: #dbe2ed;
+  display: flex;
+  justify-content: space-around;
+  width: 100vw;
+  background-color: #748a9d;
+}
+
+h1 {
+  cursor: pointer;
 }
 /*# sourceMappingURL=styles.css.map */

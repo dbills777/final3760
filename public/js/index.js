@@ -112,7 +112,7 @@ function startTodos(initalTodos) {
     checkBtn.innerHTML = '<i class="fa fa-check"></i>';
     delBtn.innerHTML = '<i class="fa fa-trash"></i>';
     // set text content
-    newLi.textContent = todo.todo;
+    newLi.textContent = todo.recipe;
     itemCat.textContent = todo.category;
     // check for completed status
     if (!todo.complete) {
@@ -302,7 +302,7 @@ function allCategories(initalTodos) {
         const check = document.createElement('btn');
         check.innerHTML = '<i class="fa fa-check"></i>';
         check.classList.add('checkStyle');
-        items.textContent = todo.todo;
+        items.textContent = todo.cat;
         items.classList.add('category-list');
         if (todo.complete) {
           items.appendChild(check);
