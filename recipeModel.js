@@ -1,13 +1,9 @@
 const mongoose = require('mongoose');
 
 const RecipeSchema = new mongoose.Schema({
-  recipe: String,
+  name: String,
   complete: Boolean,
-  cat: String,
   ingredients: Array,
-  category: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Category',
-  },
+  directions: String
 });
 module.exports = mongoose.model('Rec', RecipeSchema);

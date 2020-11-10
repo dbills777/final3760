@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,300;0,700;1,300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap");
 .header {
   display: flex;
   justify-content: center;
@@ -345,217 +345,135 @@ template {
 }
 
 body {
-  margin-top: 4rem;
-  justify-content: center;
-  height: 100vh;
-  background-color: #4E5D6A;
-  font-family: 'Open Sans Condensed', sans-serif;
-  margin: 0 auto;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 20px;
+  font-family: 'Noto Serif', serif;
+  max-width: 1200px;
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  min-width: 500px;
-  max-width: 60vw;
-  padding: 10px;
-  margin-right: 0;
-}
-
-.addTask {
-  width: 100%;
-  display: flex;
-}
-
-.addTask > input[type='text'] {
-  width: 100%;
-  color: #333333;
-  border: none;
-  border-bottom: 2px solid gray;
-  background: none;
-  padding: 2rem;
-  margin-right: 2rem;
-  font-size: 1rem;
-  outline: none;
-}
-
-.addTask button {
-  margin: 10px;
-  background: #9ea69d;
-  color: #fcfcfc;
-  font-size: 1rem;
-  text-transform: uppercase;
-  padding: 10px;
-  border: none;
-  outline: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#reset {
-  margin: 10px;
-  background: #9ea69d;
-  color: #fcfcfc;
-  font-size: 1rem;
-  text-transform: uppercase;
-  padding: 10px;
-  width: 40rem;
-  border: none;
-  outline: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#delete {
-  margin: 10px;
-  background: #9ea69d;
-  color: #fcfcfc;
-  font-size: 1rem;
-  text-transform: uppercase;
-  padding: 10px;
-  border: none;
-  outline: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.notCompleted,
-.Completed,
-.Categories {
-  min-width: 600px;
-  max-width: 100%;
-  margin-right: 15rem;
-}
-
+p,
+h1,
+h2,
 h3,
-.holder {
-  font-size: 1rem;
-  text-transform: uppercase;
-  margin: 0 auto;
-  margin-top: 10px;
-  color: #fff;
+a,
+ul {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  color: #222;
 }
 
-ol {
-  list-style: none;
-}
-
-ol li {
-  color: white;
-  font-weight: 800;
-  width: 100%;
-  padding: 20px;
-  margin: 5px 0;
-  font-size: 1rem;
-  border-radius: 15px;
-}
-
-ol li .btn {
-  float: right;
-  padding: 5px;
-  font-size: 1rem;
-  margin-right: 15px;
-  background: none;
-  border: none;
-  outline: none;
-  cursor: pointer;
-}
-
-ol li .btn:hover {
-  background-color: white;
-  border-radius: 10px;
-  color: black;
-}
-
-ol.Completed li {
-  background-color: #7bed8d;
-  border: 1px solid black;
-  text-decoration: line-through;
-  text-decoration-color: rgba(3, 3, 3, 0.527);
-  color: #748a9d;
-  box-shadow: 4px 6px 5px -2px rgba(0, 0, 0, 0.75);
-  cursor: pointer;
-}
-
-ol.Completed li:hover {
-  transform: scale(1.05);
-  font-size: 2rem;
-}
-
-ol.Categories li {
-  background-color: #fe5e5e;
-  border: 1px solid black;
-  box-shadow: 4px 6px 5px -2px rgba(0, 0, 0, 0.75);
-  cursor: pointer;
-}
-
-ol.Categories li:hover {
-  transform: scale(1.05);
-  font-size: 2rem;
-}
-
-ol.notCompleted li {
-  background-color: #a6bcd0;
-  border: 1px solid black;
-  box-shadow: 4px 6px 5px -2px rgba(0, 0, 0, 0.75);
-  cursor: pointer;
-}
-
-ol.notCompleted li:hover {
-  transform: scale(1.1);
-  font-size: 2rem;
-}
-
-.checkStyle {
-  margin-left: 1rem;
-  color: rgba(255, 255, 255, 0.39);
-}
-
-.strike {
-  text-decoration: line-through;
-  text-decoration-color: rgba(255, 255, 255, 0.37);
-}
-
-.capital {
-  text-transform: capitalize;
-}
-
-.category-list {
-  font-size: 1rem;
-  padding-right: 5rem;
-  color: #565656;
-  text-transform: capitalize;
-}
-
-.itemHover:hover {
-  font-size: 3rem;
-}
-
-.black {
-  color: black;
-}
-
-#add-button,
-#reset {
-  background-color: transparent;
-}
-
-#add-button:hover,
-#reset:hover {
-  transform: scale(1.05);
-  color: red;
-}
-
+/* nav & footer styles */
 nav {
-  color: #dbe2ed;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 60px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  text-transform: uppercase;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+nav li {
+  list-style-type: none;
+  margin-left: 20px;
+}
+
+nav h1 {
+  font-size: 3em;
+}
+
+nav p,
+nav a {
+  color: #777;
+  font-weight: 300;
+}
+
+footer {
+  color: #777;
+  text-align: center;
+  margin: 80px auto 20px;
+}
+
+h2 {
+  margin-bottom: 40px;
+}
+
+h3 {
+  text-transform: capitalize;
+  margin-bottom: 8px;
+}
+
+.content {
+  margin-left: 20px;
+}
+
+.recipe-container {
   display: flex;
   justify-content: space-around;
-  width: 100vw;
-  background-color: #748a9d;
+  width: 90vw;
+  align-items: center;
 }
 
-h1 {
+.ingredient-list ul li {
+  list-style-type: none;
+}
+
+.create-recipe form {
+  min-width: 50vw;
+  margin: 0 auto;
+}
+
+.create-recipe input,
+.create-recipe textarea {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 8px;
+}
+
+.create-recipe label {
+  display: block;
+  margin-top: 24px;
+}
+
+textarea {
+  height: 120px;
+}
+
+.create-recipe button {
+  margin-top: 20px;
+  background: crimson;
+  color: white;
+  padding: 6px;
+  border: 0;
+  font-size: 1.2em;
   cursor: pointer;
+}
+
+/* recipe display styles */
+.recipe-header {
+  width: 50%;
+  margin: 0 auto;
+  margin-bottom: 3rem;
+  text-align: center;
+  font-size: 2rem;
+  color: black;
+  border-bottom: 1px solid #ddd;
+}
+
+.recipe-name {
+  color: #777;
+  font-size: 2.5rem;
+}
+
+.recipe-directions {
+  font-style: italic;
 }
 /*# sourceMappingURL=styles.css.map */

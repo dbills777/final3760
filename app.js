@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const Todo = require('./todoModel');
-const Cat = require('./categoryModel');
+const morgan = require('morgan');
+const Rec = require('./recipeModel');
 const app = express();
 const port = 3000;
 app.use(express.static('public'));
@@ -17,82 +17,48 @@ mongoose
   })
   .then((result) =>
     app.listen(process.env.PORT || port, () =>
-      console.log(`"Static Todo App Listening at ${port}`)
+      console.log(`"Static Recipe App Listening at ${port}`)
     )
   )
   .catch((err) => console.log(err));
 
-app.post('/addtodo', (req, res) => {
-  console.log("dsfafkdjf;",req.body);
-  Todo.create(
-    {
-      todo: req.body.todo,
-      complete: false,
-      cat: req.body.cat,
-    },
+app.set('view engine', 'ejs');
 
-    (err, todos) => {
-      if (err) {
-        console.log(err);
-      }
-      Todo.find((err, todos) => {
-        if (err) {
-          console.log(err);
-        }
-        res.json(todos);
-      });
+// middleware
+// app.use((req, res, next) => {
+//   console.log('new request made:');
+//   console.log('host: ', req.hostname);
+//   console.log('path: ', req.path);
+//   console.log('method: ', req.method);
+//   next();
+// });
+// app.use(morgan('dev'));
+
+app.use((req, res, next) => {
+  res.locals.path = req.path;
+  next();
+});
+
+app.get('/', (req, res) => {
+  
+  Rec.find((err, recs)=>{
+    if(err){
+      console.log(err)
     }
-  );
+    // res.json(recs)
+    res.render('index', { title: 'Home', recs });
+  })
 });
 
-app.get('/alltodos', (req, res) => {
-  Todo.find((err, todo) => {
-    if (err) {
-      console.log(err);
-    }
-    res.json(todo);
-  });
+app.get('/about', (req, res) => {
+  res.render('about', { title: 'About' });
 });
-app.delete('/todo/:id', (req, res) => {
-  Todo.deleteOne(
-    {
-      _id: req.params.id,
-    },
-    (err, todo) => {
-      if (err) {
-        console.log(err);
-      }
 
-      res.json(todo);
-    }
-  );
+app.get('/recipes/create', (req, res) => {
+  res.render('create', { title: 'Create a new recipe' });
 });
-app.delete('/delete', (req, res) => {
-  const query = { complete: true };
 
-  Todo.deleteMany(query)
-    .then((res) => res.json(todo))
-    .catch((err) => console.error(`Delete failed with error: ${err}`));
-});
-app.put('/todo/:id', (req, res) => {
-  Todo.findByIdAndUpdate(req.params.id, { new: true }, (err, todo) => {
-    todo.complete = !todo.complete;
-    todo.save();
-    console.log(todo);
-
-    Todo.updateOne(req.query, (err, todo) => {
-      console.log(todo);
-
-      console.log(req.params);
-      if (err) {
-        console.log(err);
-      }
-      Todo.find((err, todo) => {
-        if (err) {
-          console.log(err);
-        }
-        res.json(todo);
-      });
-    });
-  });
+// 404 page
+app.use((req, res) => {
+  res.status(404).render('404', { title: '404' });
 });
