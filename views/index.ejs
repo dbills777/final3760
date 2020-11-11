@@ -1,27 +1,26 @@
 <html lang="en">
-<%- include("./partials/head.ejs") %>
+  <%- include("./partials/head.ejs") %>
 
-<body>
-  <%- include("./partials/nav.ejs") %>
+  <body>
+    <%- include("./partials/nav.ejs") %>
 
-  <div class="blogs content">
-    <h2 class="recipe-header">My Recipes</h2>
-    
+    <div class="recipe content">
+      <h2 class="recipe-header">My Recipes</h2>
 
-    <% if (recs.length > 0) { %>
-      <% recs.forEach(recipe => { %>
+      <% if (recs.length > 0) { %> <% recs.forEach(recipe => { %>
 
-        <h3 class="recipe-name"><%= recipe.name %></h3>
-        <p class="recipe-ingredients"><%= recipe.ingredients %></p>
-        <p class="recipe-directions"><%= recipe.directions %> </p>
-
-      <% }) %>
-    <% } else { %>
+        h3 class="recipe-name"><%= recipe.name %></h3>
+      <p class="recipe-ingredients">
+        Ingredients: <%= recipe.ingredients.join(', ') %>
+      </p>
+      <p class="recipe-directions">
+        Directions: <%= recipe.directions %> <%= recipe.createdAt %>
+      </p>
+      <% }) %> <% } else { %>
       <p>There are no recipes to display...</p>
-    <% } %>
-    
-  </div>
+      <% } %>
+    </div>
 
-  <%- include("./partials/footer.ejs") %>
-</body>
+    <%- include("./partials/footer.ejs") %>
+  </body>
 </html>

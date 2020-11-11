@@ -415,6 +415,18 @@ textarea {
 }
 
 /* recipe display styles */
+.recipe {
+  padding-bottom: 10rem;
+}
+
+.recipe-name {
+  border-left: 10px solid blue;
+}
+
+.recipe-directions {
+  padding-bottom: 2.5rem;
+}
+
 .recipe-header {
   width: 50%;
   margin: 0 auto;

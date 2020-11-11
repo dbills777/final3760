@@ -40,16 +40,31 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-  
-  Rec.find((err, recs)=>{
-    if(err){
-      console.log(err)
+  Rec.find((err, recs) => {
+    recs.forEach(element => {
+      console.log(element.ingredients)
+    });
+    if (err) {
+      console.log(err);
     }
-    // res.json(recs)
     res.render('index', { title: 'Home', recs });
-  })
+  });
 });
-
+app.get('/add-recipe', (req, res) => {
+  const recipe = new Rec({
+    name: 'This is another recipe',
+    ingredients: ['one', 'two', 'three', 'four', 'five', 'ingredients'],
+    directions: 'this is a list of directions for the new recipe',
+  });
+  recipe
+    .save()
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 app.get('/about', (req, res) => {
   res.render('about', { title: 'About' });
 });
