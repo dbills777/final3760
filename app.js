@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const Rec = require('./recipeModel');
 const { render } = require('ejs');
+const { result } = require('lodash');
 const app = express();
 const port = 3000;
 app.use(bodyParser.json());
@@ -58,13 +59,13 @@ app.get('/', (req, res) => {
 //     });
 // });
 app.post('/recipes', (req, res) => {
-  const list = req.body.ingredients.split(',')
-  console.log(req.body)
-  console.log(req.body.ingredients, list)
+  const list = req.body.ingredients.split(',');
+  console.log(req.body);
+  console.log(req.body.ingredients, list);
   const recipe = new Rec({
     name: req.body.name,
     ingredients: list,
-    directions: req.body.directions
+    directions: req.body.directions,
   });
   recipe
     .save()
@@ -78,16 +79,27 @@ app.post('/recipes', (req, res) => {
   // console.log(req.body);
   // console.log(req.body.ingredients.split(' '));
 });
-app.get('/recipes/:id', (req, res)=>{
-  const id = req.params.id
-  Rec.findById(id).then(result=>{
-    console.log('individual ingredient list', result.ingredients)
-    res.render('details',{recipe: result, title: 'Recipe Details'})
-  })
-  .catch(err=>{
-    console.log(err)
-  })
-})
+app.get('/recipes/:id', (req, res) => {
+  const id = req.params.id;
+  Rec.findById(id)
+    .then((result) => {
+      console.log('individual ingredient list', result.ingredients);
+      res.render('details', { recipe: result, title: 'Recipe Details' });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+app.delete('/recipes/:id', (req, res) => {
+  const id = req.params.id;
+  Rec.findByIdAndDelete(id)
+    .then((result) => {
+      res.json({ redirect: '/' });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 app.get('/create', (req, res) => {
   res.render('create', { title: 'Create a new recipe' });
 });
