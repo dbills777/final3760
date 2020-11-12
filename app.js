@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const Rec = require('./recipeModel');
+const { render } = require('ejs');
 const app = express();
 const port = 3000;
 app.use(bodyParser.json());
@@ -70,6 +71,15 @@ app.post('/recipes', (req, res) => {
   // console.log(req.body);
   // console.log(req.body.ingredients.split(' '));
 });
+app.get('/recipes/:id', (req, res)=>{
+  const id = req.params.id
+  Rec.findById(id).then(result=>{
+    res.render('details',{recipe: result, title: 'Recipe Details'})
+  })
+  .catch(err=>{
+    console.log(err)
+  })
+})
 app.get('/recipes/create', (req, res) => {
   res.render('create', { title: 'Create a new recipe' });
 });
