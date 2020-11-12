@@ -5,7 +5,7 @@ body {
   padding: 0 20px;
   font-family: 'Noto Serif', serif;
   max-width: 1200px;
-  // background-color: $background-color;
+  background-color: $background-color;
 }
 p,
 h1,
@@ -16,7 +16,7 @@ ul {
   margin: 0;
   padding: 0;
   text-decoration: none;
-  color: #222;
+  color: rgb(211, 211, 211);
 }
 
 h2 {
@@ -25,6 +25,10 @@ h2 {
 h3 {
   text-transform: capitalize;
   margin-bottom: 8px;
+  padding: 1rem;
+  border-bottom:3px solid $nav-background;
+  display: inline-block;
+
 }
 .content {
   margin-left: 20px;
@@ -59,7 +63,7 @@ textarea {
 }
 .create-recipe button {
   margin-top: 20px;
-  background: crimson;
+  background: $bright-green;
   color: white;
   padding: 6px;
   border: 0;
@@ -77,8 +81,8 @@ textarea {
   border-left: 10px solid $bright-green;
 }
 .recipe a:hover h3 {
-  color: black;
-  background-color: $bright-green;
+  background-color: rgb(218, 218, 218);
+  border-bottom:3px solid $bright-green;
 }
 .recipe-directions {
   padding-bottom: 2.5rem;

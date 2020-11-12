@@ -58,7 +58,14 @@ app.get('/', (req, res) => {
 //     });
 // });
 app.post('/recipes', (req, res) => {
-  const recipe = new Rec(req.body);
+  const list = req.body.ingredients.split(',')
+  console.log(req.body)
+  console.log(req.body.ingredients, list)
+  const recipe = new Rec({
+    name: req.body.name,
+    ingredients: list,
+    directions: req.body.directions
+  });
   recipe
     .save()
     .then((result) => {
