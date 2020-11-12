@@ -14,16 +14,50 @@
     </div>
     <h4>Ingredient List</h4> 
     <div class="ingredient-list">
-        <% if (recipe.ingredients.length > 0) { %> <% recipe.ingredients.forEach(ingredient => { %>
+        <% if (recipe.ingredients.length > 0) { %> <% recipe.shopping.forEach(ingredient => { %>
       <ul>        
+            <% if (ingredient.complete) { %>    
           <li>
             <input
               type="checkbox"
               id="select ingredient"
               name="ingredient"
+              checked
+              
             />
+            <% } else { %>
+            <li>
+            <input
+              type="checkbox"
+              id="select ingredient"
+              name="ingredient"
+              unchecked
+              
+            />
+            <% } %>
             
-            <%= ingredient %></p>
+            <%= ingredient.item%></p>
+          </li>
+          <a class="edit" data-list="<%= recipe._id %> ">edit</a>
+        </ul>
+
+      <% }) %> <% } else { %>
+      <p>There are no ingredients to display...</p>
+      <% } %>
+        
+      </div>
+          <h4>Shopping List</h4> 
+
+      <div class="ingredient-list">
+        <% if (recipe.shopping.length > 0) { %> <% recipe.shopping.forEach(ingredient => { %>
+          
+      <ul>    
+         
+
+            <% if (ingredient.complete) { %>
+            <%= ingredient.item%></p>
+            <%}  %>
+            
           </li>
           <a class="edit" data-list="<%= recipe._id %> ">edit</a>
         </ul>

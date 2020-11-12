@@ -59,14 +59,22 @@ app.get('/', (req, res) => {
 //     });
 // });
 app.post('/recipes', (req, res) => {
+  
   const list = req.body.ingredients.split(',');
+  const shoplist = list.map((item)=>{
+  return { complete: false, item: item }
+  })
+    console.log(shoplist)
+
   console.log(req.body);
   console.log(req.body.ingredients, list);
   const recipe = new Rec({
     name: req.body.name,
     ingredients: list,
     directions: req.body.directions,
+    shopping: shoplist
   });
+
   recipe
     .save()
     .then((result) => {
@@ -84,6 +92,7 @@ app.get('/recipes/:id', (req, res) => {
   Rec.findById(id)
     .then((result) => {
       console.log('individual ingredient list', result.ingredients);
+      console.log(result.shopping)
       res.render('details', { recipe: result, title: 'Recipe Details' });
     })
     .catch((err) => {

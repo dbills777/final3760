@@ -8,10 +8,15 @@ const RecipeSchema = new mongoose.Schema(
     },
     complete: Boolean,
     ingredients: Array,
+    shopping: [{
+      item: String,
+      complete: Boolean
+    }],
     directions: {
       type: String,
       required: true,
     },
+    
   },
   { timestamps: true }
 );
