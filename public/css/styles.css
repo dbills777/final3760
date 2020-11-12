@@ -419,8 +419,16 @@ textarea {
   padding-bottom: 10rem;
 }
 
-.recipe-name {
-  border-left: 10px solid blue;
+.recipe a {
+  display: block;
+  margin: 40px 0;
+  padding-left: 30px;
+  border-left: 10px solid #7BED8D;
+}
+
+.recipe a:hover h3 {
+  color: black;
+  background-color: #7BED8D;
 }
 
 .recipe-directions {

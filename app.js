@@ -80,7 +80,7 @@ app.get('/recipes/:id', (req, res)=>{
     console.log(err)
   })
 })
-app.get('/recipes/create', (req, res) => {
+app.get('/create', (req, res) => {
   res.render('create', { title: 'Create a new recipe' });
 });
 app.get('/about', (req, res) => {
