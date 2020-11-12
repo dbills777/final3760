@@ -8,14 +8,14 @@
       <h2 class="recipe-header">My Recipes</h2>
 
       <% if (recs.length > 0) { %> <% recs.forEach(recipe => { %>
-
-        h3 class="recipe-name"><%= recipe.name %></h3>
+       <a class="single" href="/recipes/<%= recipe._id %>">
+      <h3 class="recipe-name"><%= recipe.name %></h3>
+      <p class="recipe-date">Created: <%= recipe.createdAt %></p>
       <p class="recipe-ingredients">
         Ingredients: <%= recipe.ingredients.join(', ') %>
       </p>
-      <p class="recipe-directions">
-        Directions: <%= recipe.directions %> <%= recipe.createdAt %>
-      </p>
+      <p class="recipe-directions">Directions: <%= recipe.directions %></p>
+      </a>
       <% }) %> <% } else { %>
       <p>There are no recipes to display...</p>
       <% } %>

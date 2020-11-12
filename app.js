@@ -5,8 +5,6 @@ const morgan = require('morgan');
 const Rec = require('./recipeModel');
 const app = express();
 const port = 3000;
-app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 require('dotenv').config();
 
@@ -21,19 +19,12 @@ mongoose
     )
   )
   .catch((err) => console.log(err));
-
+//Set Veiw Engine
 app.set('view engine', 'ejs');
 
 // middleware
-// app.use((req, res, next) => {
-//   console.log('new request made:');
-//   console.log('host: ', req.hostname);
-//   console.log('path: ', req.path);
-//   console.log('method: ', req.method);
-//   next();
-// });
-// app.use(morgan('dev'));
-
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use((req, res, next) => {
   res.locals.path = req.path;
   next();
@@ -41,8 +32,8 @@ app.use((req, res, next) => {
 
 app.get('/', (req, res) => {
   Rec.find((err, recs) => {
-    recs.forEach(element => {
-      console.log(element.ingredients)
+    recs.forEach((element) => {
+      console.log(element.ingredients);
     });
     if (err) {
       console.log(err);
@@ -50,27 +41,40 @@ app.get('/', (req, res) => {
     res.render('index', { title: 'Home', recs });
   });
 });
-app.get('/add-recipe', (req, res) => {
-  const recipe = new Rec({
-    name: 'This is another recipe',
-    ingredients: ['one', 'two', 'three', 'four', 'five', 'ingredients'],
-    directions: 'this is a list of directions for the new recipe',
-  });
+// app.get('/add-recipe', (req, res) => {
+//   const recipe = new Rec({
+//     name: 'This is another recipe',
+//     ingredients: ['one', 'two', 'three', 'four', 'five', 'ingredients'],
+//     directions: 'this is a list of directions for the new recipe',
+//   });
+//   recipe
+//     .save()
+//     .then((result) => {
+//       res.send(result);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// });
+app.post('/recipes', (req, res) => {
+  const recipe = new Rec(req.body);
   recipe
     .save()
     .then((result) => {
-      res.send(result);
+      res.redirect('/');
     })
     .catch((err) => {
       console.log(err);
     });
+
+  // console.log(req.body);
+  // console.log(req.body.ingredients.split(' '));
+});
+app.get('/recipes/create', (req, res) => {
+  res.render('create', { title: 'Create a new recipe' });
 });
 app.get('/about', (req, res) => {
   res.render('about', { title: 'About' });
-});
-
-app.get('/recipes/create', (req, res) => {
-  res.render('create', { title: 'Create a new recipe' });
 });
 
 // 404 page
