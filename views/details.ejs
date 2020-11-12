@@ -7,12 +7,31 @@
     <div class="details content">
         <h3 class="recipe-name"><%= recipe.name %></h3>
       <p class="recipe-date">Created: <%= recipe.createdAt %></p>
-      <p class="recipe-ingredients">
+      <!-- <p class="recipe-ingredients">
         Ingredients: <%= recipe.ingredients.join(', ') %>
-      </p>
+      </p> -->
       <p class="recipe-directions">Directions: <%= recipe.directions %></p>
         </div>
     </div>
+    <h4>Ingredient List</h4> 
+    <div class="ingredient-list">
+        <% if (recipe.ingredients.length > 0) { %> <% recipe.ingredients.forEach(ingredient => { %>
+      <ul>        
+          <li>
+            <input
+              type="checkbox"
+              id="select ingredient"
+              name="ingredient"
+            />
+            
+            <%= ingredient %></p>
+          </li>
+        </ul>
+      <% }) %> <% } else { %>
+      <p>There are no ingredients to display...</p>
+      <% } %>
+        
+      </div>
     <%- include("./partials/footer.ejs") %>
 
 </body>

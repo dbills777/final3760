@@ -74,6 +74,7 @@ app.post('/recipes', (req, res) => {
 app.get('/recipes/:id', (req, res)=>{
   const id = req.params.id
   Rec.findById(id).then(result=>{
+    console.log('individual ingredient list', result.ingredients)
     res.render('details',{recipe: result, title: 'Recipe Details'})
   })
   .catch(err=>{
