@@ -473,7 +473,7 @@ textarea {
 
 .delete:hover {
   cursor: pointer;
-  box-shadow: 1px 2px 3px #7BED8D;
+  box-shadow: 1px 2px 3px white;
 }
 
 .ingredient-list {
@@ -511,6 +511,26 @@ textarea {
   background-color: #0099ff;
   cursor: pointer;
   margin: 0.5rem;
+}
+
+.deletebtn {
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  outline: none;
+  border: none;
+  background-color: #fff;
+  color: #fff;
+  margin-bottom: 0;
+  background-color: red;
+  cursor: pointer;
+  margin: 0.5rem;
+}
+
+.select {
+  color: #fff;
+  background: none;
+  border: none;
 }
 
 /* nav & footer styles */

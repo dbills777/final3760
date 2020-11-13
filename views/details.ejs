@@ -13,6 +13,7 @@
 
     <p class="recipe-directions">Directions: <%= recipe.directions %></p>
     <a class="delete" data-delete="<%= recipe._id %> ">delete</a>
+    <!-- <button class=" delete deletebtn fa fa-minus fa-1x" data-nameedit="<%= recipe._id %> "></button> -->
        
   </div>
   </div>
@@ -44,10 +45,21 @@
     <% if (recipe.shopping.length > 0) { %> <% recipe.shopping.forEach(ingredient => { %>
     <ul>
       <% if (ingredient.complete) { %>
-        <%= ingredient.item%> qty: <%= ingredient.quantity%></p>
+        <%= ingredient.item%> qty: 
+        <select class="select" name="listQuantity" id="item-quantity">
+          <option value=""><%= ingredient.quantity%></option>
+          <option value="dog">2</option>
+          <option value="cat">3</option>
+          <option value="hamster">4</option>
+          <option value="parrot">5</option>
+          <option value="spider">6</option>
+          <option value="goldfish">7</option>
+        </select>
+        </p>
         <%}  %>
       </li>
       <a class="edit" data-list="<%= recipe._id %> ">edit</a>
+      
     </ul>
 
     <% }) %> <% } else { %>
