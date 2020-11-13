@@ -1,84 +1,93 @@
 <html lang="en">
-  <%- include("./partials/head.ejs") %>
+<%- include("./partials/head.ejs") %>
 
 <body>
-        <%- include("./partials/nav.ejs") %>
+  <%- include("./partials/nav.ejs") %>
 
-    <div class="details content">
-        <h3 class="recipe-name"><%= recipe.name %></h3>
-      <p class="recipe-date">Created: <%= recipe.createdAt %></p>
-     
-      <p class="recipe-directions">Directions: <%= recipe.directions %></p>
-      <a class="delete" data-doc="<%= recipe._id %> ">delete</a>
-        </div>
-    </div>
-    <h4>Ingredient List</h4> 
-    <div class="ingredient-list">
-        <% if (recipe.ingredients.length > 0) { %> <% recipe.shopping.forEach(ingredient => { %>
-      <ul>        
-            <% if (ingredient.complete) { %>    
-          <li>
-            <input
-              type="checkbox"
-              id="select ingredient"
-              name="ingredient"
-              checked
-              
-            />
-            <% } else { %>
-            <li>
-            <input
-              type="checkbox"
-              id="select ingredient"
-              name="ingredient"
-              unchecked
-              
-            />
-            <% } %>
-            
-            <%= ingredient.item%></p>
-          </li>
-          <a class="edit" data-list="<%= recipe._id %> ">edit</a>
-        </ul>
+  <div class="details content">
+     <input type="text" class="recipe-name edit-input" value="<%= recipe.name %>" disabled />
+        <button class="editButton fa fa-pencil-square-o fa-1x" data-nameedit="<%= recipe._id %> "></button>
+        <!-- <button class="removeButton fa fa-minus"></button> -->
+    <!-- <h3 class="recipe-name"><%= recipe.name %></h3> -->
+    <p class="recipe-date">Created: <%= recipe.createdAt %></p>
 
-      <% }) %> <% } else { %>
-      <p>There are no ingredients to display...</p>
-      <% } %>
+    <p class="recipe-directions">Directions: <%= recipe.directions %></p>
+    <a class="delete" data-delete="<%= recipe._id %> ">delete</a>
+       
+  </div>
+  </div>
+  <h4>Ingredient List</h4>
+  <div class="ingredient-list">
+    <% if (recipe.ingredients.length > 0) { %> <% recipe.shopping.forEach(ingredient => { %>
+    <ul>
+      <% if (ingredient.complete) { %>
+      <li>
+        <input type="checkbox" id="select ingredient" name="ingredient" checked />
+        <% } else { %>
+      <li>
+        <input type="checkbox" id="select ingredient" name="ingredient" unchecked />
+        <% } %>
+
+        <%= ingredient.item%></p>
+      </li>
+      <a class="edit" data-list="<%= recipe._id %> ">edit</a>
+    </ul>
+
+    <% }) %> <% } else { %>
+    <p>There are no ingredients to display...</p>
+    <% } %>
+
+  </div>
+  <h4>Shopping List</h4>
+
+  <div class="ingredient-list">
+    <% if (recipe.shopping.length > 0) { %> <% recipe.shopping.forEach(ingredient => { %>
+    <ul>
+      <% if (ingredient.complete) { %>
+        <%= ingredient.item%> qty: <%= ingredient.quantity%></p>
+        <%}  %>
+      </li>
+      <a class="edit" data-list="<%= recipe._id %> ">edit</a>
+    </ul>
+
+    <% }) %> <% } else { %>
+    <p>There are no ingredients to display...</p>
+    <% } %>
+
+  </div>
+  <%- include("./partials/footer.ejs") %>
+  <script>
+    const deletebtn = document.querySelector('a.delete')
+    deletebtn.addEventListener('click', (e) => {
+      const endpoint = `/recipes/${deletebtn.dataset.delete}`;
+      fetch(endpoint, {
+        method: 'DELETE'
+      })
+        .then((response) => response.json())
+        .then((data) => window.location.href = data.redirect)
+        .catch(err => console.log(err))
+    })
+    const nameInput = document.querySelector('input.recipe-name')
+    const editButton =document.querySelector('.editButton')
+    editButton.addEventListener('click',(event)=>{
+      nameInput.disabled = !nameInput.disabled
+      nameInput.focus()
+    })
+    
+    nameInput.addEventListener('blur', (event) => {
+      const newDescription = event.target.value
+
+      const endpoint = `/recipes/${newDescription}/${editButton.dataset.nameedit}`
+      console.log(endpoint);
+      fetch(endpoint, {
+        method: 'PUT',
         
-      </div>
-          <h4>Shopping List</h4> 
-
-      <div class="ingredient-list">
-        <% if (recipe.shopping.length > 0) { %> <% recipe.shopping.forEach(ingredient => { %>
-          
-      <ul>    
-         
-
-            <% if (ingredient.complete) { %>
-            <%= ingredient.item%></p>
-            <%}  %>
-            
-          </li>
-          <a class="edit" data-list="<%= recipe._id %> ">edit</a>
-        </ul>
-
-      <% }) %> <% } else { %>
-      <p>There are no ingredients to display...</p>
-      <% } %>
-        
-      </div>
-    <%- include("./partials/footer.ejs") %>
-      <script>
-        const deletebtn = document.querySelector('a.delete')
-        deletebtn.addEventListener('click',(e)=>{
-          const endpoint = `/recipes/${deletebtn.dataset.doc}`;
-          fetch(endpoint, {
-            method: 'DELETE'
-          })
-          .then((response)=> response.json())
-          .then((data)=> window.location.href = data.redirect)
-          .catch(err=>console.log(err))
-        })
-      </script>
+      })
+    .then((response) => response.json())
+    .then((data) => (window.location.href = data.redirect))
+    .catch((err) => console.log(err));
+});
+  </script>
 </body>
+
 </html>

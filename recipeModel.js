@@ -10,6 +10,7 @@ const RecipeSchema = new mongoose.Schema(
     ingredients: Array,
     shopping: [{
       item: String,
+      quantity: Number,
       complete: Boolean
     }],
     directions: {

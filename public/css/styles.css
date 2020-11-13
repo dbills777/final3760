@@ -494,6 +494,25 @@ textarea {
   box-shadow: 1px 2px 3px #7BED8D;
 }
 
+.edit-input {
+  background: none;
+  border: none;
+}
+
+.editButton {
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  outline: none;
+  border: none;
+  background-color: #fff;
+  color: #fff;
+  margin-bottom: 0;
+  background-color: #0099ff;
+  cursor: pointer;
+  margin: 0.5rem;
+}
+
 /* nav & footer styles */
 nav {
   display: flex;

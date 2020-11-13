@@ -5,8 +5,10 @@ const morgan = require('morgan');
 const Rec = require('./recipeModel');
 const { render } = require('ejs');
 const { result } = require('lodash');
+const { update } = require('./recipeModel');
 const app = express();
 const port = 3000;
+mongoose.set('useFindAndModify', false);
 app.use(bodyParser.json());
 require('dotenv').config();
 
@@ -21,6 +23,7 @@ mongoose
     )
   )
   .catch((err) => console.log(err));
+
 //Set Veiw Engine
 app.set('view engine', 'ejs');
 
@@ -31,7 +34,7 @@ app.use((req, res, next) => {
   res.locals.path = req.path;
   next();
 });
-
+// GET ROOT PAGE
 app.get('/', (req, res) => {
   Rec.find((err, recs) => {
     recs.forEach((element) => {
@@ -43,28 +46,13 @@ app.get('/', (req, res) => {
     res.render('index', { title: 'Home', recs });
   });
 });
-// app.get('/add-recipe', (req, res) => {
-//   const recipe = new Rec({
-//     name: 'This is another recipe',
-//     ingredients: ['one', 'two', 'three', 'four', 'five', 'ingredients'],
-//     directions: 'this is a list of directions for the new recipe',
-//   });
-//   recipe
-//     .save()
-//     .then((result) => {
-//       res.send(result);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// });
+//POST A NEW RECIPE//
 app.post('/recipes', (req, res) => {
-  
   const list = req.body.ingredients.split(',');
-  const shoplist = list.map((item)=>{
-  return { complete: false, item: item }
-  })
-    console.log(shoplist)
+  const shoplist = list.map((item) => {
+    return { complete: false, item: item, quantity: 1};
+  });
+  console.log(shoplist);
 
   console.log(req.body);
   console.log(req.body.ingredients, list);
@@ -72,7 +60,8 @@ app.post('/recipes', (req, res) => {
     name: req.body.name,
     ingredients: list,
     directions: req.body.directions,
-    shopping: shoplist
+    shopping: shoplist,
+    
   });
 
   recipe
@@ -83,22 +72,21 @@ app.post('/recipes', (req, res) => {
     .catch((err) => {
       console.log(err);
     });
-
-  // console.log(req.body);
-  // console.log(req.body.ingredients.split(' '));
 });
+//GET ONE SPECIFIC RECIPE
 app.get('/recipes/:id', (req, res) => {
   const id = req.params.id;
   Rec.findById(id)
     .then((result) => {
       console.log('individual ingredient list', result.ingredients);
-      console.log(result.shopping)
+      console.log(result.shopping);
       res.render('details', { recipe: result, title: 'Recipe Details' });
     })
     .catch((err) => {
       console.log(err);
     });
 });
+//DELETE ONE RECIPE
 app.delete('/recipes/:id', (req, res) => {
   const id = req.params.id;
   Rec.findByIdAndDelete(id)
@@ -109,14 +97,43 @@ app.delete('/recipes/:id', (req, res) => {
       console.log(err);
     });
 });
+
+app.put('/recipes/:update/:id', (req, res) => {
+  const id = req.params.id
+  const update = req.params.update
+  Rec.findByIdAndUpdate(id, { new: true }, (err, rec) => {
+    console.log('545456',rec)
+    rec.name = update
+    rec.save().then((result)=>{
+      res.json({redirect: `/recipes/${id}`})
+    })
+
+    // Rec.updateOne(req.query, (err, rec) => {
+    //   console.log(rec);
+    //   rec.name = req.query.name
+    //   console.log(req.params,'5454665');
+    //   if (err) {
+    //     console.log(err);
+    //   }
+    //   Rec.find((err, rec) => {
+    //     if (err) {
+    //       console.log(err);
+    //     }
+    //     res.json(rec);
+    //   });
+    // });
+  });
+});
+//GET CREATE NEW RECIPE PAGE IN NAV
 app.get('/create', (req, res) => {
   res.render('create', { title: 'Create a new recipe' });
 });
+//GET ABOUT PAGE IN NAV
 app.get('/about', (req, res) => {
   res.render('about', { title: 'About' });
 });
 
-// 404 page
+// GET 404 page
 app.use((req, res) => {
   res.status(404).render('404', { title: '404' });
 });
