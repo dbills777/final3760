@@ -6,16 +6,48 @@
 
   <div class="details content">
      <input type="text" class="recipe-name edit-input" value="<%= recipe.name %>" disabled />
-        <button class="editButton fa fa-pencil-square-o fa-1x" data-nameedit="<%= recipe._id %> "></button>
-        <!-- <button class="removeButton fa fa-minus"></button> -->
-    <!-- <h3 class="recipe-name"><%= recipe.name %></h3> -->
-    <p class="recipe-date">Created: <%= recipe.createdAt %></p>
-
-    <p class="recipe-directions">Directions: <%= recipe.directions %></p>
-    <a class="delete" data-delete="<%= recipe._id %> ">delete</a>
-    <!-- <button class=" delete deletebtn fa fa-minus fa-1x" data-nameedit="<%= recipe._id %> "></button> -->
-       
+        <button class="editButton fa fa-pencil-square-o fa-1x" data-nameedit="<%= recipe._id %> " onclick='editDescription()'></button>
+        <br>
+     
+        <textarea id="body" class="recipe-name directions edit-input" name="directions" required disabled><%= recipe.directions %></textarea>
+        <span>
+              Description
+          </span>
+        <button class="editButton descButton fa fa-pencil-square-o fa-1x" data-directions="<%= recipe._id %> " onclick='editDirections()'></button>
+    
+    <a class="delete" data-delete="<%= recipe._id %> ">delete</a>      
   </div>
+
+ <h4>Shopping List</h4>
+  <div class="ingredient-list">
+    <% if (recipe.shopping.length > 0) { %> <% recipe.shopping.forEach(ingredient => { %>    
+      <% if (ingredient.complete) { %>      
+        
+      <p class="recipe-name">
+       
+        <a class="single" href="/list/<%= recipe._id %>/<%=ingredient._id%>">
+          <span>
+             <%= ingredient.item%> 
+          </span>
+         
+        </a>
+         qty:
+        <a class="single" href="/list/<%= recipe._id %>/<%=ingredient._id%>">
+          <span>
+             <%= ingredient.quantity%> 
+          </span>
+        </a>
+      </p>
+     
+      </a>
+        <%}  %>
+      
+      
+    
+    <% }) %> <% } else { %>
+    <p>There are no ingredients to display...</p>
+    <% } %>
+
   </div>
   <h4>Ingredient List</h4>
   <div class="ingredient-list">
@@ -31,7 +63,6 @@
 
         <%= ingredient.item%></p>
       </li>
-      <a class="edit" data-list="<%= recipe._id %> ">edit</a>
     </ul>
 
     <% }) %> <% } else { %>
@@ -39,66 +70,65 @@
     <% } %>
 
   </div>
-  <h4>Shopping List</h4>
+  
 
-  <div class="ingredient-list">
-    <% if (recipe.shopping.length > 0) { %> <% recipe.shopping.forEach(ingredient => { %>
-    <ul>
-      <% if (ingredient.complete) { %>
-        <%= ingredient.item%> qty: 
-        <select class="select" name="listQuantity" id="item-quantity">
-          <option value=""><%= ingredient.quantity%></option>
-          <option value="dog">2</option>
-          <option value="cat">3</option>
-          <option value="hamster">4</option>
-          <option value="parrot">5</option>
-          <option value="spider">6</option>
-          <option value="goldfish">7</option>
-        </select>
-        </p>
-        <%}  %>
-      </li>
-      <a class="edit" data-list="<%= recipe._id %> ">edit</a>
-      
-    </ul>
-
-    <% }) %> <% } else { %>
-    <p>There are no ingredients to display...</p>
-    <% } %>
-
-  </div>
   <%- include("./partials/footer.ejs") %>
   <script>
-    const deletebtn = document.querySelector('a.delete')
-    deletebtn.addEventListener('click', (e) => {
-      const endpoint = `/recipes/${deletebtn.dataset.delete}`;
-      fetch(endpoint, {
-        method: 'DELETE'
-      })
-        .then((response) => response.json())
-        .then((data) => window.location.href = data.redirect)
-        .catch(err => console.log(err))
-    })
-    const nameInput = document.querySelector('input.recipe-name')
-    const editButton =document.querySelector('.editButton')
-    editButton.addEventListener('click',(event)=>{
-      nameInput.disabled = !nameInput.disabled
-      nameInput.focus()
-    })
     
-    nameInput.addEventListener('blur', (event) => {
-      const newDescription = event.target.value
-
-      const endpoint = `/recipes/${newDescription}/${editButton.dataset.nameedit}`
-      console.log(endpoint);
-      fetch(endpoint, {
-        method: 'PUT',
-        
+      const deletebtn = document.querySelector('a.delete')
+      deletebtn.addEventListener('click', (e) => {
+        const endpoint = `/recipes/${deletebtn.dataset.delete}`;
+        fetch(endpoint, {
+          method: 'DELETE'
+        })
+          .then((response) => response.json())
+          .then((data) => window.location.href = data.redirect)
+          .catch(err => console.log(err))
       })
-    .then((response) => response.json())
-    .then((data) => (window.location.href = data.redirect))
-    .catch((err) => console.log(err));
-});
+      
+  editDescription = (event)=>{
+      const nameInput = document.querySelector('input.recipe-name')
+      const editButton =document.querySelector('.editButton')
+        nameInput.disabled = !nameInput.disabled
+        nameInput.focus()
+      nameInput.addEventListener('blur', (event) => {
+        const newDescription = event.target.value
+
+        const endpoint = `/recipes/${newDescription}/${editButton.dataset.nameedit}`
+        console.log(endpoint);
+        fetch(endpoint, {
+          method: 'PUT',
+          
+        })
+      .then((response) => response.json())
+      .then((data) => (window.location.href = data.redirect))
+      .catch((err) => console.log(err));
+    });
+  }
+  editDirections = (event)=>{
+      const nameInput = document.querySelector('textarea.directions')
+      const editButton =document.querySelector('.descButton')
+        nameInput.disabled = !nameInput.disabled
+        nameInput.focus()
+      nameInput.addEventListener('blur', (event) => {
+        const newDescription = event.target.value
+
+        const endpoint = `/directions/${newDescription}/${editButton.dataset.directions}`
+        console.log(endpoint);
+        fetch(endpoint, {
+          method: 'PUT',
+          
+        })
+      .then((response) => response.json())
+      .then((data) => (window.location.href = data.redirect))
+      .catch((err) => console.log(err));
+    });
+  }
+    
+updateQuantity = (event)=>{
+      const selectedItem = document.querySelector('.select')
+      console.log(event.target.value, selectedItem.dataset.shopitem)
+}
   </script>
 </body>
 

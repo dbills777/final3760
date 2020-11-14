@@ -1,0 +1,87 @@
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+
+  <body>
+    <%- include("./partials/nav.ejs") %>
+
+    <div class="details content" data-ing="<%= single %> ">
+      <!-- <h1>Click Edit Button to change QTY</h1> -->
+      <% single.forEach((shopitem)=>{ %>
+      <span>
+        <input
+          type="text"
+          class="item-name edit-input recipe-name"
+          value="<%= shopitem.item %>"
+          data-id="<%= shopitem._id %>"
+          disabled
+        />
+        <button
+          class="nameEdit editButton fa fa-pencil-square-o fa-1x"
+          data-shopedit="<%=recipe._id%> "
+          onclick="editListName()"
+        ></button
+        ><span>Edit Name</span>
+        QTY:
+        <input
+          type="text"
+          class="item-qty edit-input recipe-name"
+          value="<%= shopitem.quantity %>"
+          data-id="<%= shopitem._id %>"
+          disabled
+        />
+      </span>
+      <button
+        class="qtyEdit editButton fa fa-pencil-square-o fa-1x"
+        data-qtyedit="<%=recipe._id%> "
+        onclick="editQuantity()"
+      ></button
+      ><span>Edit QTY</span>
+      <p class="recipe-directions">Directions: <%= recipe.directions %></p>
+      <a class="delete" data-delete="<%= recipe._id %> ">delete</a>
+
+      <% }); %>
+    </div>
+
+    <%- include("./partials/footer.ejs") %>
+    <script>
+      editQuantity = (event) => {
+        const nameInput = document.querySelector('input.item-qty');
+        const editButton = document.querySelector('.qtyEdit');
+        const itemId = document.querySelector('.edit-input');
+        nameInput.disabled = !nameInput.disabled;
+        nameInput.focus();
+        nameInput.addEventListener('blur', (event) => {
+          const newDescription = event.target.value;
+
+          const endpoint = `/item/${newDescription}/${itemId.dataset.id}/${editButton.dataset.qtyedit}`;
+          console.log(endpoint);
+          fetch(endpoint, {
+            method: 'PUT',
+          })
+            .then((response) => response.json())
+            .then((data) => (window.location.href = data.redirect))
+            .catch((err) => console.log(err));
+        });
+      };
+      editListName = (event) => {
+        const nameInput = document.querySelector('input.item-name');
+        const editButton = document.querySelector('.nameEdit');
+        const itemId = document.querySelector('.edit-input');
+        nameInput.disabled = !nameInput.disabled;
+        nameInput.focus();
+        nameInput.addEventListener('blur', (event) => {
+          const newDescription = event.target.value;
+
+          const endpoint = `/name/${newDescription}/${itemId.dataset.id}/${editButton.dataset.shopedit}`;
+          console.log(endpoint);
+          fetch(endpoint, {
+            method: 'PUT',
+          })
+            .then((response) => response.json())
+            .then((data) => (window.location.href = data.redirect))
+            .catch((err) => console.log(err));
+        });
+      };
+    </script>
+  </body>
+</html>

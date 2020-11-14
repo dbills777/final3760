@@ -408,6 +408,14 @@ textarea {
   height: 120px;
 }
 
+textarea.recipe-name {
+  background: none;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  width: 75vw;
+}
+
 .create-recipe button {
   margin-top: 20px;
   background: #7BED8D;

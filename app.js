@@ -50,7 +50,7 @@ app.get('/', (req, res) => {
 app.post('/recipes', (req, res) => {
   const list = req.body.ingredients.split(',');
   const shoplist = list.map((item) => {
-    return { complete: false, item: item, quantity: 1};
+    return { complete: false, item: item, quantity: 1 };
   });
   console.log(shoplist);
 
@@ -61,7 +61,6 @@ app.post('/recipes', (req, res) => {
     ingredients: list,
     directions: req.body.directions,
     shopping: shoplist,
-    
   });
 
   recipe
@@ -78,14 +77,13 @@ app.get('/recipes/:id', (req, res) => {
   const id = req.params.id;
   Rec.findById(id)
     .then((result) => {
-      console.log('individual ingredient list', result.ingredients);
-      console.log(result.shopping);
       res.render('details', { recipe: result, title: 'Recipe Details' });
     })
     .catch((err) => {
       console.log(err);
     });
 });
+
 //DELETE ONE RECIPE
 app.delete('/recipes/:id', (req, res) => {
   const id = req.params.id;
@@ -98,36 +96,106 @@ app.delete('/recipes/:id', (req, res) => {
     });
 });
 
+//UPDATE A SINGLE RECIPE NAME
 app.put('/recipes/:update/:id', (req, res) => {
-  const id = req.params.id
-  const update = req.params.update
+  const id = req.params.id;
+  const update = req.params.update;
   Rec.findByIdAndUpdate(id, { new: true }, (err, rec) => {
-    console.log('545456',rec)
-    rec.name = update
-    rec.save().then((result)=>{
-      res.json({redirect: `/recipes/${id}`})
-    })
-
-    // Rec.updateOne(req.query, (err, rec) => {
-    //   console.log(rec);
-    //   rec.name = req.query.name
-    //   console.log(req.params,'5454665');
-    //   if (err) {
-    //     console.log(err);
-    //   }
-    //   Rec.find((err, rec) => {
-    //     if (err) {
-    //       console.log(err);
-    //     }
-    //     res.json(rec);
-    //   });
-    // });
+    rec.name = update;
+    rec.save().then((result) => {
+      res.json({ redirect: `/recipes/${id}` });
+    });
   });
 });
+//UPDATE A SINGLE RECIPE DESCRIPTION
+app.put('/directions/:update/:id', (req, res) => {
+  const id = req.params.id;
+  const update = req.params.update;
+  Rec.findByIdAndUpdate(id, { new: true }, (err, rec) => {
+    rec.directions = update;
+    rec.save().then((result) => {
+      res.json({ redirect: `/recipes/${id}` });
+    });
+  });
+});
+// UPDATE A SINGLE SHOPPING ITEM QUANTITY
+app.put('/item/:update/:ing/:id', (req, res) => {
+  const id = req.params.id;
+  const update = req.params.update;
+  const ingredient = req.params.ing;
+  Rec.findByIdAndUpdate(id, ingredient, { new: true }, (err, rec) => {
+    rec.shopping.filter((item) => {
+      if (item._id == ingredient) {
+        item.quantity = update;
+      }
+    });
+
+    rec.save().then((result) => {
+      res.json({ redirect: `/recipes/${id}` });
+    });
+  });
+});
+// UPDATE A SINGLE SHOPPING ITEM NAME
+app.put('/name/:update/:ing/:id', (req, res) => {
+  const id = req.params.id;
+  const update = req.params.update;
+  const ingredient = req.params.ing;
+  Rec.findByIdAndUpdate(id, ingredient, { new: true }, (err, rec) => {
+    rec.shopping.filter((item) => {
+      if (item._id == ingredient) {
+        item.item = update;
+      }
+    });
+
+    rec.save().then((result) => {
+      res.json({ redirect: `/recipes/${id}` });
+    });
+  });
+});
+// GET A SHOPPING LIST ITEM TO UPDATE A QUANTITY
+app.get('/list/:id/:ing', (req, res) => {
+  const id = req.params.id;
+  const ing = req.params;
+  Rec.findById(id)
+    .then((result) => {
+      const filtershop = result.shopping.filter((item) => {
+        return item._id == ing.ing;
+      });
+      res.render('shopItem', {
+        single: filtershop,
+        recipe: result,
+        title: 'Edit Item Details',
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+// GET A SHOPPING LIST ITEM TO UPDATE A NAME
+app.get('/name/:id/:ing', (req, res) => {
+  const id = req.params.id;
+  const ing = req.params;
+  Rec.findById(id)
+    .then((result) => {
+      const filtershop = result.shopping.filter((item) => {
+        return item._id == ing.ing;
+      });
+      res.render('shopItemName', {
+        single: filtershop,
+        recipe: result,
+        title: 'Edit Name Details',
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 //GET CREATE NEW RECIPE PAGE IN NAV
 app.get('/create', (req, res) => {
   res.render('create', { title: 'Create a new recipe' });
 });
+
 //GET ABOUT PAGE IN NAV
 app.get('/about', (req, res) => {
   res.render('about', { title: 'About' });

@@ -1,0 +1,63 @@
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+
+  <body>
+    <%- include("./partials/nav.ejs") %>
+
+    <div class="details content" data-ing="<%= single %> ">
+      <!-- <h1>Click Edit Button to change QTY</h1> -->
+      <% single.forEach((shopitem)=>{ %>
+      <span class="recipe-name">Item: <%= shopitem.item %> QTY: </span>
+      <input
+        type="text"
+        class="item-qty edit-input recipe-name"
+        value="<%= shopitem.quantity %>"
+        data-id="<%= shopitem._id %>"
+        disabled
+      />
+      <button
+        class="qtyEdit editButton fa fa-pencil-square-o fa-1x"
+        data-qtyedit="<%=recipe._id%> "
+        onclick="editQuantity()"
+      ></button><span>Click to Edit QTY</span>
+      <p class="recipe-directions">Directions: <%= recipe.directions %></p>
+      <a class="delete" data-delete="<%= recipe._id %> ">delete</a>
+
+      <% }); %>
+    </div>
+
+    <%- include("./partials/footer.ejs") %>
+    <script>
+      // const deletebtn = document.querySelector('a.delete')
+      // deletebtn.addEventListener('click', (e) => {
+      //   const endpoint = `/recipes/${deletebtn.dataset.delete}`;
+      //   fetch(endpoint, {
+      //     method: 'DELETE'
+      //   })
+      //     .then((response) => response.json())
+      //     .then((data) => window.location.href = data.redirect)
+      //     .catch(err => console.log(err))
+      // })
+
+      editQuantity = (event) => {
+        const nameInput = document.querySelector('input.item-qty');
+        const editButton = document.querySelector('.qtyEdit');
+        const itemId = document.querySelector('.edit-input');
+          nameInput.disabled = !nameInput.disabled;
+          nameInput.focus();
+        nameInput.addEventListener('blur', (event) => {
+          const newDescription = event.target.value;
+
+          const endpoint = `/item/${newDescription}/${itemId.dataset.id}/${editButton.dataset.qtyedit}`;
+          console.log(endpoint);
+          fetch(endpoint, {
+            method: 'PUT',
+          })
+            .then((response) => response.json())
+            .then((data) => (window.location.href = data.redirect))
+            .catch((err) => console.log(err));
+        });
+      };
+    </script>
+  </body>
+</html>
