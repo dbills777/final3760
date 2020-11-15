@@ -38,7 +38,7 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
   Rec.find((err, recs) => {
     recs.forEach((element) => {
-      console.log(element.ingredients);
+      // console.log(element.ingredients);
     });
     if (err) {
       console.log(err);
@@ -129,6 +129,22 @@ app.put('/item/:update/:ing/:id', (req, res) => {
         item.quantity = update;
       }
     });
+
+    rec.save().then((result) => {
+      res.json({ redirect: `/recipes/${id}` });
+    });
+  });
+});
+// UPDATE A SINGLE SHOPPING ITEM QUANTITY
+app.put('/shoplist/:update/:id', (req, res) => {
+  const id = req.params.id;
+  const update = req.params.update;
+  const ingredient = req.params.ing;
+  console.log(update, id);
+  Rec.findByIdAndUpdate(id, ingredient, { new: true }, (err, rec) => {
+    console.log(rec, id, update);
+    newItem = { complete: 'true', item: update, quantity: 1 };
+    rec.shopping.push(newItem);
 
     rec.save().then((result) => {
       res.json({ redirect: `/recipes/${id}` });

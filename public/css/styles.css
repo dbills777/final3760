@@ -367,7 +367,7 @@ h3 {
   text-transform: capitalize;
   margin-bottom: 8px;
   padding: 1rem;
-  border-bottom: 3px solid #748a9d;
+  border-bottom: 3px solid #475057;
   display: inline-block;
 }
 
@@ -539,6 +539,26 @@ textarea.recipe-name {
   color: #fff;
   background: none;
   border: none;
+}
+
+.addButton {
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  outline: none;
+  border: none;
+  background-color: #fff;
+  color: #fff;
+  margin: 0.25px;
+  background-color: #7BED8D;
+  margin-left: 3rem;
+  cursor: pointer;
+}
+
+.box {
+  background-color: #475057;
+  padding: 1rem;
+  border-radius: 10px;
 }
 
 /* nav & footer styles */
