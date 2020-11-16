@@ -11,7 +11,7 @@
      
         <textarea id="body" class="recipe-name directions edit-input" name="directions" required disabled><%= recipe.directions %></textarea>
         <span>
-              Directions
+              Edit
           </span>
         <button class="editButton recipe-name descButton fa fa-pencil-square-o fa-1x" data-directions="<%= recipe._id %> " onclick='editDirections()'></button>
     
@@ -133,7 +133,6 @@
         nameInput.disabled = !nameInput.disabled
         nameInput.focus()
       nameInput.addEventListener('blur', (event) => {
-        if (nameInput.value !== newDescription){
           
           const newDescription = event.target.value
   
@@ -145,7 +144,6 @@
         .then((response) => response.json())
         .then((data) => (window.location.href = data.redirect))
         .catch((err) => console.log(err));
-        }
     });
   }
 
