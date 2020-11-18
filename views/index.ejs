@@ -3,24 +3,22 @@
 
   <body>
     <%- include("./partials/nav.ejs") %>
-
     <div class="recipe content">
-      <h2 class="recipe-header">My Recipes</h2>
-
+          <span class="recipe-header">My Recipes</span>
+          <span class="recipe-header">Categories</span>
       <% if (recs.length > 0) { %> <% recs.forEach(recipe => { %>
-       <a class="single" href="/recipes/<%= recipe._id %>">
-      <h3 class="recipe-name"><%= recipe.name %></h3>
-      <p class="recipe-date">Created: <%= recipe.createdAt %></p>
-      <p class="recipe-ingredients">
-        Ingredients: <%= recipe.ingredients.join(', ') %>
-      </p>
-      <p class="recipe-directions">Directions: <%= recipe.directions %></p>
+      <a class="single" href="/recipes/<%= recipe._id %>">
+        <h3 class="recipe-name"><%= recipe.name %></h3>
+        <p class="recipe-date">Created: <%= recipe.createdAt %></p>
+        <p class="recipe-ingredients">
+          Ingredients: <%= recipe.ingredients.join(', ') %>
+        </p>
+        <p class="recipe-directions"><h2>Directions:</h2> <%= recipe.directions %></p>
       </a>
       <% }) %> <% } else { %>
       <p>There are no recipes to display...</p>
       <% } %>
     </div>
-
     <%- include("./partials/footer.ejs") %>
   </body>
 </html>

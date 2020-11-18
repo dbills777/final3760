@@ -3,9 +3,6 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const Rec = require('./recipeModel');
-const { render } = require('ejs');
-const { result } = require('lodash');
-const { update } = require('./recipeModel');
 const app = express();
 const port = 3000;
 mongoose.set('useFindAndModify', false);
@@ -36,15 +33,14 @@ app.use((req, res, next) => {
 });
 // GET ROOT PAGE
 app.get('/', (req, res) => {
-  Rec.find((err, recs) => {
-    recs.forEach((element) => {
-      // console.log(element.ingredients);
-    });
-    if (err) {
+  Rec.find()
+    .sort({ updatedAt: -1 })
+    .then((recs) => {
+      res.render('index', { title: 'Home', recs });
+    })
+    .catch((err) => {
       console.log(err);
-    }
-    res.render('index', { title: 'Home', recs });
-  });
+    });
 });
 //POST A NEW RECIPE//
 app.post('/recipes', (req, res) => {
@@ -62,7 +58,6 @@ app.post('/recipes', (req, res) => {
     directions: req.body.directions,
     shopping: shoplist,
   });
-
   recipe
     .save()
     .then((result) => {
@@ -83,7 +78,6 @@ app.get('/recipes/:id', (req, res) => {
       console.log(err);
     });
 });
-
 //DELETE ONE RECIPE
 app.delete('/recipes/:id', (req, res) => {
   const id = req.params.id;
@@ -95,7 +89,6 @@ app.delete('/recipes/:id', (req, res) => {
       console.log(err);
     });
 });
-
 //UPDATE A SINGLE RECIPE NAME
 app.put('/recipes/:update/:id', (req, res) => {
   const id = req.params.id;
@@ -107,11 +100,13 @@ app.put('/recipes/:update/:id', (req, res) => {
     });
   });
 });
+
 //UPDATE A SINGLE RECIPE DESCRIPTION
 app.put('/directions/:update/:id', (req, res) => {
   const id = req.params.id;
   const update = req.params.update;
   Rec.findByIdAndUpdate(id, { new: true }, (err, rec) => {
+    console.log(rec.directions);
     rec.directions = update;
     rec.save().then((result) => {
       res.json({ redirect: `/recipes/${id}` });

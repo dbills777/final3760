@@ -9,47 +9,36 @@
         <button class="editButton fa fa-pencil-square-o fa-1x" data-nameedit="<%= recipe._id %> " onclick='editDescription()'></button>
         <br>
      
-        <textarea id="body" class="recipe-name directions edit-input" name="directions" required disabled><%= recipe.directions %></textarea>
+        <textarea id="body" class="recipe-name directions edit-input" rows = "4" name="directions" required disabled><%= recipe.directions %></textarea>
         <span>
               Edit
-          </span>
-        <button class="editButton recipe-name descButton fa fa-pencil-square-o fa-1x" data-directions="<%= recipe._id %> " onclick='editDirections()'></button>
-    
+        </span>
+        <button class="editButton recipe-name descButton fa fa-pencil-square-o fa-1x" data-directions="<%= recipe._id %> " onclick='editDirections()'></button>    
     <a class="delete" data-delete="<%= recipe._id %> ">delete</a>      
   </div>
     <div class="box">
-
-      <h4 class="recipe-name">Shopping List<button class="addButton newShopList" onclick="shoppingListAdd()" data-shoplist="<%= recipe._id %>"> <i class="fa fa-plus"></i></button><input type="text" class="shopItemName edit-input" value="+ New Item" disabled /></h4>
-      
+      <h4 class="recipe-name">Shopping List<button class="addButton newShopList" onclick="shoppingListAdd()" data-shoplist="<%= recipe._id %>"> <i class="fa fa-plus"></i></button><input type="text" class="shopItemName edit-input" value="+ New Item" disabled /></h4>      
       <div class="ingredient-list">
         <% if (recipe.shopping.length > 0) { %> <% recipe.shopping.forEach(ingredient => { %>    
-          <% if (ingredient.complete) { %>      
-            
-            <p class="recipe-name">
-              
+          <% if (ingredient.complete) { %>            
+            <p class="recipe-name">              
               <a class="single" href="/list/<%= recipe._id %>/<%=ingredient._id%>">
                 <span>
                 <input type="checkbox"><%= ingredient.item%> 
-                </span>
-                
+                </span>                
               </a>
               qty:
               <a class="single" href="/list/<%= recipe._id %>/<%=ingredient._id%>">
                 <span>
                   <%= ingredient.quantity%> 
-          </span>
-        </a>
-      </p>
-      
-    </a>
-    <%}  %>
-    
-    
-    
+                </span>
+              </a>              
+            </a>
+          </p>
+    <%}  %>    
     <% }) %> <% } else { %>
       <p>There are no ingredients to display...</p>
-      <% } %>
-      
+      <% } %>      
     </div>
   </div>
   <h4>Ingredient List</h4>
@@ -63,45 +52,38 @@
       <li>
         <input type="checkbox" id="select ingredient" name="ingredient" unchecked />
         <% } %>
-
         <%= ingredient.item%></p>
       </li>
     </ul>
-
     <% }) %> <% } else { %>
     <p>There are no ingredients to display...</p>
     <% } %>
-
   </div>
-  
-
   <%- include("./partials/footer.ejs") %>
-  <script>
-    
-      const deletebtn = document.querySelector('a.delete')
-      deletebtn.addEventListener('click', (e) => {
+  <script>    
+        const deletebtn = document.querySelector('a.delete')
+        deletebtn.addEventListener('click', (e) => {
         const endpoint = `/recipes/${deletebtn.dataset.delete}`;
         fetch(endpoint, {
           method: 'DELETE'
-        })
+          })
           .then((response) => response.json())
           .then((data) => window.location.href = data.redirect)
           .catch(err => console.log(err))
-      })
+        })
       
   editDescription = (event)=>{
       const nameInput = document.querySelector('input.recipe-name')
       const editButton =document.querySelector('.editButton')
         nameInput.disabled = !nameInput.disabled
         nameInput.focus()
-      nameInput.addEventListener('blur', (event) => {
+        nameInput.addEventListener('blur', (event) => {
         const newDescription = event.target.value
 
         const endpoint = `/recipes/${newDescription}/${editButton.dataset.nameedit}`
         console.log(endpoint);
         fetch(endpoint, {
-          method: 'PUT',
-          
+          method: 'PUT',          
         })
       .then((response) => response.json())
       .then((data) => (window.location.href = data.redirect))
@@ -113,14 +95,12 @@
       const editButton =document.querySelector('.descButton')
         nameInput.disabled = !nameInput.disabled
         nameInput.focus()
-      nameInput.addEventListener('blur', (event) => {
+        nameInput.addEventListener('blur', (event) => {
         const newDescription = event.target.value
-
         const endpoint = `/directions/${newDescription}/${editButton.dataset.directions}`
         console.log(endpoint);
         fetch(endpoint, {
-          method: 'PUT',
-          
+          method: 'PUT',          
         })
       .then((response) => response.json())
       .then((data) => (window.location.href = data.redirect))
@@ -128,14 +108,12 @@
     });
   }
   shoppingListAdd = (event)=>{
-      const nameInput = document.querySelector('input.shopItemName')
-      const editButton =document.querySelector('.newShopList')
+        const nameInput = document.querySelector('input.shopItemName')
+        const editButton =document.querySelector('.newShopList')
         nameInput.disabled = !nameInput.disabled
         nameInput.focus()
-      nameInput.addEventListener('blur', (event) => {
-          
-          const newDescription = event.target.value
-  
+        nameInput.addEventListener('blur', (event) => {          
+          const newDescription = event.target.value  
           const endpoint = `/shoplist/${newDescription}/${editButton.dataset.shoplist}`
           console.log(endpoint);
           fetch(endpoint, {
@@ -146,7 +124,6 @@
         .catch((err) => console.log(err));
     });
   }
-
   </script>
 </body>
 
