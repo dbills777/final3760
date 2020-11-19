@@ -9,10 +9,17 @@
       <% if (recs.length > 0) { %> <% recs.forEach(recipe => { %>
       <a class="single" href="/recipes/<%= recipe._id %>">
         <h3 class="recipe-name"><%= recipe.name %></h3>
-        <p class="recipe-date">Created: <%= recipe.createdAt %></p>
-        <p class="recipe-ingredients">
-          Ingredients: <%= recipe.ingredients.join(', ') %>
-        </p>
+        <h4 class="recipe-date">Created: <%= recipe.createdAt.toLocaleString() %> </h4>    
+        <h4 class="recipe-date">Last Edit: <%= recipe.updatedAt.toLocaleString() %></h4>    
+        <ul>
+          <% if (recipe.ingredients.length > 0) { %> <% recipe.ingredients.forEach(ingredient => { %>
+            <% if (ingredient) { %>            
+              <li><%=ingredient %></li>
+              <%}  %>    
+              <% }) %> <% } else { %>
+                <p>Add some Ingredients</p>
+                <% } %>      
+              </ul>    
         <p class="recipe-directions"><h2>Directions:</h2> <%= recipe.directions %></p>
       </a>
       <% }) %> <% } else { %>

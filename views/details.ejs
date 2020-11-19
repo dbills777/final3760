@@ -17,14 +17,22 @@
     <a class="delete" data-delete="<%= recipe._id %> ">delete</a>      
   </div>
     <div class="box">
-      <h4 class="recipe-name">Shopping List<button class="addButton newShopList" onclick="shoppingListAdd()" data-shoplist="<%= recipe._id %>"> <i class="fa fa-plus"></i></button><input type="text" class="shopItemName edit-input" value="+ New Item" disabled /></h4>      
+      <h4 class="shop recipe-name left">SHOPPING LIST</h4>
+      <div class="shop-container">
+      <button class=" recipe-name addButton newShopList" onclick="shoppingListAdd()" data-shoplist="<%= recipe._id %>"> <i class="fa fa-plus"></i></button><input type="text" class="shopItemName edit-input" placeholder="Add a new item" value="" disabled />
+      </div>
+      <div class="inner-box">
       <div class="ingredient-list">
+       
         <% if (recipe.shopping.length > 0) { %> <% recipe.shopping.forEach(ingredient => { %>    
           <% if (ingredient.complete) { %>            
             <p class="recipe-name">              
+              <span>
+              <input type="checkbox">
+              </span>                
               <a class="single" href="/list/<%= recipe._id %>/<%=ingredient._id%>">
                 <span>
-                <input type="checkbox"><%= ingredient.item%> 
+                <%= ingredient.item%> 
                 </span>                
               </a>
               qty:
@@ -40,9 +48,10 @@
       <p>There are no ingredients to display...</p>
       <% } %>      
     </div>
+    <%- include("./partials/itemCheckbox.ejs") %>
+    </div>
   </div>
   
-  <%- include("./partials/itemCheckbox.ejs") %>
   <%- include("./partials/footer.ejs") %>
   <script>    
         const deletebtn = document.querySelector('a.delete')

@@ -114,7 +114,7 @@ app.put('/directions/:update/:id', (req, res) => {
   });
 });
 // Toggle list complete
-app.put('/checkbox/:update/:ing/:id', (req, res) => {
+app.put('/checkbox/:ing/:id', (req, res) => {
   const id = req.params.id;
   const update = req.params.update;
   const ingredient = req.params.ing;

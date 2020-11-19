@@ -1,5 +1,5 @@
-<h4>Ingredient List</h4>
-  <div class="ingredient-list">
+<div class="ingredient-list">
+    <h4>Quick Add from Ingredients</h4>
     <% if (recipe.ingredients.length > 0) { %> <% recipe.shopping.forEach(ingredient => { %>
     <ul>
       <% if (ingredient.complete) { %>
@@ -40,9 +40,7 @@
           const boxStatus = selection.checked
           const currentItem = event.target.dataset.check
           const currentItemId = event.target.dataset.list
-          console.log('currentItem',currentItem , 'checkbox says: ', boxStatus, currentItemId)
-          const endpoint = `/checkbox/${boxStatus}/${currentItemId}/${editButton.dataset.nameedit}`;
-          console.log(endpoint);
+          const endpoint = `/checkbox/${currentItemId}/${editButton.dataset.nameedit}`;
           fetch(endpoint, {
           method: 'PUT',          
         })

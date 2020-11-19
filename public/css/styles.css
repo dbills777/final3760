@@ -11,6 +11,7 @@ html {
   /* 1 */
   -webkit-text-size-adjust: 100%;
   /* 2 */
+  font-size: 80%;
 }
 
 /* Sections
@@ -556,14 +557,34 @@ textarea.recipe-name {
   color: #fff;
   margin: 0.25px;
   background-color: #7BED8D;
-  margin-left: 3rem;
   cursor: pointer;
+}
+
+.shop {
+  display: flex;
+}
+
+.box .recipe-name {
+  padding: 0;
+  margin: 0;
+  padding-bottom: 5px;
+}
+
+.shop-container {
+  padding-left: 0;
+  font-size: 2rem;
+  padding-bottom: 1rem;
 }
 
 .box {
   background-color: #475057;
   padding: 1rem;
   border-radius: 10px;
+}
+
+.inner-box {
+  display: flex;
+  justify-content: space-between;
 }
 
 /* nav & footer styles */

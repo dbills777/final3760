@@ -195,13 +195,35 @@ textarea.recipe-name {
   color: #fff;
   margin: 0.25px;
   background-color: $bright-green;
-  margin-left: 3rem;
-
   cursor: pointer;
 }
-.box{
-  // border: 1px solid $bright-green;
+
+.shop {
+  display: flex;
+}
+.box .recipe-name {
+  padding: 0;
+  margin: 0;
+  padding-bottom: 5px;
+}
+.shop-container {
+  padding-left: 0;
+  font-size: 2rem;
+  padding-bottom: 1rem;
+}
+.box {
   background-color: $nav-background;
   padding: 1rem;
   border-radius: 10px;
 }
+.inner-box {
+  display: flex;
+  justify-content: space-between;
+  // background-color: pink;
+}
+// .left {
+//   float: left;
+// }
+// .right {
+//   float: right;
+// }
