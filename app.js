@@ -113,6 +113,22 @@ app.put('/directions/:update/:id', (req, res) => {
     });
   });
 });
+// Toggle list complete
+app.put('/checkbox/:update/:ing/:id', (req, res) => {
+  const id = req.params.id;
+  const update = req.params.update;
+  const ingredient = req.params.ing;
+  Rec.findByIdAndUpdate(id, ingredient, { new: true }, (err, rec) => {
+    rec.shopping.filter((item) => {
+      if (item._id == ingredient) {
+        item.complete = !item.complete;
+      }
+    });
+    rec.save().then((result) => {
+      res.json({ redirect: `/recipes/${id}` });
+    });
+  });
+});
 // UPDATE A SINGLE SHOPPING ITEM QUANTITY
 app.put('/item/:update/:ing/:id', (req, res) => {
   const id = req.params.id;

@@ -6,6 +6,7 @@
       <li>
         <input 
         data-check="<%= ingredient %>"
+        data-list="<%= ingredient.id %>"
         type="checkbox"
         class="selected"
         id="select ingredient" 
@@ -17,6 +18,7 @@
       <li>
         <input 
         data-check="<%= ingredient %>"
+        data-list="<%= ingredient._id %>"
         type="checkbox"
         class="selected"
         id="select ingredient" 
@@ -34,7 +36,18 @@
   <script>
       const addToShoppingList = (event)=>{
           const selection = document.querySelector('input.selected')
-        //   const editButton =document.querySelector('.editButton')
-          console.log('clicked', event.target.dataset.check)
+          const editButton =document.querySelector('.editButton')
+          const boxStatus = selection.checked
+          const currentItem = event.target.dataset.check
+          const currentItemId = event.target.dataset.list
+          console.log('currentItem',currentItem , 'checkbox says: ', boxStatus, currentItemId)
+          const endpoint = `/checkbox/${boxStatus}/${currentItemId}/${editButton.dataset.nameedit}`;
+          console.log(endpoint);
+          fetch(endpoint, {
+          method: 'PUT',          
+        })
+      .then((response) => response.json())
+      .then((data) => (window.location.href = data.redirect))
+      .catch((err) => console.log(err));
       }
   </script>
