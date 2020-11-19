@@ -1,0 +1,40 @@
+<h4>Ingredient List</h4>
+  <div class="ingredient-list">
+    <% if (recipe.ingredients.length > 0) { %> <% recipe.shopping.forEach(ingredient => { %>
+    <ul>
+      <% if (ingredient.complete) { %>
+      <li>
+        <input 
+        data-check="<%= ingredient %>"
+        type="checkbox"
+        class="selected"
+        id="select ingredient" 
+        name="ingredient" 
+        checked
+        onchange="addToShoppingList(event)"
+        />
+        <% } else { %>
+      <li>
+        <input 
+        data-check="<%= ingredient %>"
+        type="checkbox"
+        class="selected"
+        id="select ingredient" 
+        name="ingredient" 
+        unchecked 
+        onchange="addToShoppingList(event)"/>
+        <% } %>
+        <%= ingredient.item%></p>
+      </li>
+    </ul>
+    <% }) %> <% } else { %>
+    <p>There are no ingredients to display...</p>
+    <% } %>
+  </div>
+  <script>
+      const addToShoppingList = (event)=>{
+          const selection = document.querySelector('input.selected')
+        //   const editButton =document.querySelector('.editButton')
+          console.log('clicked', event.target.dataset.check)
+      }
+  </script>
