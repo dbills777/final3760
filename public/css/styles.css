@@ -1,3 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap");
+.details {
+  font-size: 2rem;
+  float: right;
+  align-content: center;
+}
+
+.rating {
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.rating li {
+  list-style-type: none;
+  border: none;
+}
+
+.rating-item {
+  border: 1px solid #fff;
+  cursor: pointer;
+  font-size: 2em;
+  color: yellow;
+}
+
+/* initial: make all stars full */
+.rating-item::before {
+  content: "\2605";
+}
+
+/* make until the clicked star (the rest) empty */
+.rating-item.active ~ .rating-item::before {
+  content: "\2606";
+}
+
+/* on hover make all full */
+.rating:hover .rating-item::before {
+  content: "\2605";
+}
+
+/* make until the hovered (the rest) empty */
+.rating-item:hover ~ .rating-item::before {
+  content: "\2606";
+}
+
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
@@ -5,7 +50,6 @@
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
-@import url("https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap");
 html {
   line-height: 1.15;
   /* 1 */

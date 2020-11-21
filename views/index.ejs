@@ -4,11 +4,12 @@
   <body>
     <%- include("./partials/nav.ejs") %>
     <div class="recipe content">
-          <span class="recipe-header">My Recipes</span>
-          <span class="recipe-header">Categories</span>
-      <% if (recs.length > 0) { %> <% recs.forEach(recipe => { %>
-      <a class="single" href="/recipes/<%= recipe._id %>">
-        <h3 class="recipe-name"><%= recipe.name %></h3>
+      <span class="recipe-header">My Recipes</span>
+      <span class="recipe-header">Categories</span>
+      <% if (recipe.length > 0) { %> <% recipe.forEach(recipe => { %>
+        <a class="single" href="/recipes/<%= recipe._id %>">
+          <h3 class="recipe-name"><%= recipe.name %>            
+          </h3>
         <h4 class="recipe-date">Created: <%= recipe.createdAt.toLocaleString() %> </h4>    
         <h4 class="recipe-date">Last Edit: <%= recipe.updatedAt.toLocaleString() %></h4>    
         <ul>

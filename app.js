@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
   Rec.find()
     .sort({ updatedAt: -1 })
     .then((recs) => {
-      res.render('index', { title: 'Home', recs });
+      res.render('index', { title: 'Home', recipe: recs });
     })
     .catch((err) => {
       console.log(err);
@@ -50,13 +50,14 @@ app.post('/recipes', (req, res) => {
   });
   console.log(shoplist);
 
-  console.log(req.body);
+  console.log('req.body', req.body);
   console.log(req.body.ingredients, list);
   const recipe = new Rec({
     name: req.body.name,
     ingredients: list,
     directions: req.body.directions,
     shopping: shoplist,
+    rating: '1',
   });
   recipe
     .save()
@@ -95,6 +96,17 @@ app.put('/recipes/:update/:id', (req, res) => {
   const update = req.params.update;
   Rec.findByIdAndUpdate(id, { new: true }, (err, rec) => {
     rec.name = update;
+    rec.save().then((result) => {
+      res.json({ redirect: `/recipes/${id}` });
+    });
+  });
+});
+//UPDATE A SINGLE RECIPE Rating
+app.put('/rate/:update/:id', (req, res) => {
+  const id = req.params.id;
+  const update = req.params.update;
+  Rec.findByIdAndUpdate(id, { new: true }, (err, rec) => {
+    rec.rating = update;
     rec.save().then((result) => {
       res.json({ redirect: `/recipes/${id}` });
     });

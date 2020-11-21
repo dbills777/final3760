@@ -6,6 +6,9 @@ const RecipeSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    rating:{
+      type: String
+    },
     complete: Boolean,
     ingredients: Array,
     shopping: [
