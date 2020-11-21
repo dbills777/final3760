@@ -9,6 +9,11 @@
       <% if (recipe.length > 0) { %> <% recipe.forEach(recipe => { %>
         <a class="single" href="/recipes/<%= recipe._id %>">
           <h3 class="recipe-name"><%= recipe.name %>            
+            <div class="details content">   
+          <ul class="rating" data-currentrecipe = "<%= recipe._id %> "data-startrate="<%= recipe.rating %>"> Rating: 
+            <li class="rating-item"><%= recipe.rating %></li>           
+          </ul>
+      </div>   
           </h3>
         <h4 class="recipe-date">Created: <%= recipe.createdAt.toLocaleString() %> </h4>    
         <h4 class="recipe-date">Last Edit: <%= recipe.updatedAt.toLocaleString() %></h4>    
@@ -28,5 +33,6 @@
       <% } %>
     </div>
     <%- include("./partials/footer.ejs") %>
+    
   </body>
 </html>
