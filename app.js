@@ -42,6 +42,34 @@ app.get('/', (req, res) => {
       console.log(err);
     });
 });
+// Sort highest to lowest
+app.get('/sort', (req, res) => {
+  
+  Rec.find()
+    .sort({ rating: -1 })
+    .then((recs) => {
+      res.render('index', { title: 'Home', recipe: recs });
+    })
+    .then((result) => {
+      res.redirect('/');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+app.get('/sortdown', (req, res) => {
+  Rec.find()
+    .sort({ rating: 1 })
+    .then((recs) => {
+      res.render('index', { title: 'Home', recipe: recs });
+    })
+    .then((result) => {
+      res.redirect('/');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 //POST A NEW RECIPE//
 app.post('/recipes', (req, res) => {
   const list = req.body.ingredients.split(',');

@@ -3,15 +3,25 @@
 
   <body>
     <%- include("./partials/nav.ejs") %>
+    <nav class="filter">
+  <ul>
+    <li><a href="/sort">Highest</a></li>
+    <li><a href="/sortdown">Lowest</a></li>
+    <li><a href="/create">New recipe</a></li>
+  </ul>
+</nav>
     <div class="recipe content">
-      <span class="recipe-header">My Recipes</span>
-      <span class="recipe-header">Categories</span>
+  
       <% if (recipe.length > 0) { %> <% recipe.forEach(recipe => { %>
+        <%= console.log(recipe)%>
         <a class="single" href="/recipes/<%= recipe._id %>">
           <h3 class="recipe-name"><%= recipe.name %>            
             <div class="details content">   
-          <ul class="rating" data-currentrecipe = "<%= recipe._id %> "data-startrate="<%= recipe.rating %>"> Rating: 
-            <li class="rating-item"><%= recipe.rating %></li>           
+          <ul class="rating" data-currentrecipe = "<%= recipe._id %> "data-startrate="<%= recipe.rating %>"> 
+            <% for( let index = 0; index < Number(recipe.rating); index++ ) { %>
+            
+              <li class="rating-item"></li>           
+            <% } %>
           </ul>
       </div>   
           </h3>
@@ -33,6 +43,13 @@
       <% } %>
     </div>
     <%- include("./partials/footer.ejs") %>
-    
+     <script>
+       const sortByStars= ()=>{
+         console.log('clicked')
+         const endpoint = `/sort`
+          console.log(endpoint);
+          
+       }
+     </script>
   </body>
 </html>

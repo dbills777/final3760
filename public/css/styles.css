@@ -662,6 +662,15 @@ nav a {
   font-weight: 300;
 }
 
+.filter {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 60px;
+  padding-bottom: 10px;
+  text-transform: uppercase;
+  border-bottom: none;
+}
+
 footer {
   color: #777;
   text-align: center;
