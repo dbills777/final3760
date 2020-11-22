@@ -5,8 +5,9 @@
   <%- include("./partials/nav.ejs") %>
        
               <%- include("./partials/rating.ejs") %>        
-
-     <input type="text" class="recipe-name edit-input" value="<%= recipe.name %>" disabled />
+    <p ondblclick = "editDescription()" >
+      <input type="text" class="recipe-name edit-input" value="<%= recipe.name %>" disabled />
+    </p>
         <button class="editButton fa fa-pencil-square-o fa-1x" data-nameedit="<%= recipe._id %> " onclick='editDescription()'></button>
         <br>
 
@@ -52,6 +53,9 @@
     <%- include("./partials/itemCheckbox.ejs") %>
     </div>
   </div>
+</div>
+<%- include("./partials/ingredients.ejs") %>
+</div>
   
   <%- include("./partials/footer.ejs") %>
   <script>    

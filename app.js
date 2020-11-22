@@ -44,7 +44,6 @@ app.get('/', (req, res) => {
 });
 // Sort highest to lowest
 app.get('/sort', (req, res) => {
-  
   Rec.find()
     .sort({ rating: -1 })
     .then((recs) => {
@@ -57,6 +56,7 @@ app.get('/sort', (req, res) => {
       console.log(err);
     });
 });
+// Sort highest to lowest
 app.get('/sortdown', (req, res) => {
   Rec.find()
     .sort({ rating: 1 })
@@ -186,7 +186,7 @@ app.put('/item/:update/:ing/:id', (req, res) => {
     });
   });
 });
-// UPDATE A SINGLE SHOPPING ITEM QUANTITY
+// ADD A NEW ITEM TO A SHOPPING LIST
 app.put('/shoplist/:update/:id', (req, res) => {
   const id = req.params.id;
   const update = req.params.update;
@@ -196,6 +196,22 @@ app.put('/shoplist/:update/:id', (req, res) => {
     console.log(rec, id, update);
     newItem = { complete: 'true', item: update, quantity: 1 };
     rec.shopping.push(newItem);
+
+    rec.save().then((result) => {
+      res.json({ redirect: `/recipes/${id}` });
+    });
+  });
+});
+// ADD A NEW INGREDIENT
+app.put('/ingredient/:update/:id', (req, res) => {
+  const id = req.params.id;
+  const update = req.params.update;
+  const ingredient = req.params.ing;
+  Rec.findByIdAndUpdate(id, ingredient, { new: true }, (err, rec) => {
+    console.log(rec, id, update);
+    newItem = { complete: 'false', item: update, quantity: 1 };
+    rec.shopping.push(newItem);
+    rec.ingredients.push(update);
 
     rec.save().then((result) => {
       res.json({ redirect: `/recipes/${id}` });
@@ -232,25 +248,6 @@ app.get('/list/:id/:ing', (req, res) => {
         single: filtershop,
         recipe: result,
         title: 'Edit Item Details',
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
-// GET A SHOPPING LIST ITEM TO UPDATE A NAME
-app.get('/name/:id/:ing', (req, res) => {
-  const id = req.params.id;
-  const ing = req.params;
-  Rec.findById(id)
-    .then((result) => {
-      const filtershop = result.shopping.filter((item) => {
-        return item._id == ing.ing;
-      });
-      res.render('shopItemName', {
-        single: filtershop,
-        recipe: result,
-        title: 'Edit Name Details',
       });
     })
     .catch((err) => {

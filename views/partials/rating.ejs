@@ -1,48 +1,52 @@
 <div class="details content">
-   
-      <ul class="rating" data-currentrecipe = "<%= recipe._id %> "data-startrate="<%= recipe.rating %>"> Rating: 
-        <li class="rating-item" data-rate="1"></li>
-        <li class="rating-item " data-rate="2"></li>
-        <li class="rating-item " data-rate="3"></li>
-        <li class="rating-item" data-rate="4"></li>
-        <li class="rating-item" data-rate="5"></li>
-      </ul>
-</div>    
+  <ul
+    class="rating"
+    data-currentrecipe="<%= recipe._id %> "
+    data-startrate="<%= recipe.rating %>"
+  >
+    <li class="rating-item" data-rate="1"></li>
+    <li class="rating-item" data-rate="2"></li>
+    <li class="rating-item" data-rate="3"></li>
+    <li class="rating-item" data-rate="4"></li>
+    <li class="rating-item" data-rate="5"></li>
+  </ul>
+</div>
 <script>
   const starcontainer = document.querySelector('.rating');
-  const items = starcontainer.querySelectorAll('.rating-item')
-  console.log('Initail Rating', starcontainer.dataset.startrate)
-  changeClass =(item)=>{
+  const items = starcontainer.querySelectorAll('.rating-item');
+  console.log('Initail Rating', starcontainer.dataset.startrate);
+  changeClass = (item) => {
     // console.log('infunction', item)
-    item.classList.add('active')
-  }
-  items.forEach(item=>{
-    if(item.dataset.rate===starcontainer.dataset.startrate){
-      changeClass(item)
+    item.classList.add('active');
+  };
+  items.forEach((item) => {
+    if (item.dataset.rate === starcontainer.dataset.startrate) {
+      changeClass(item);
     }
-  })
-  
-  starcontainer.onclick = e => {
-    const newRate = event.target.getAttribute('data-rate')
-    const id = starcontainer.dataset.currentrecipe 
-    console.log(id, newRate) 
-    const endpoint = `/rate/${newRate}/${id}`
+  });
+
+  starcontainer.onclick = (e) => {
+    const newRate = event.target.getAttribute('data-rate');
+    const id = starcontainer.dataset.currentrecipe;
+    console.log(id, newRate);
+    const endpoint = `/rate/${newRate}/${id}`;
     console.log(endpoint);
     fetch(endpoint, {
-        method: 'PUT',          
+      method: 'PUT',
     })
-    .then((response) => response.json())
-    .then((data) => (window.location.href = data.redirect))
-    .catch((err) => console.log(err));
-  const starClass = e.target.classList;
-//   console.log(starClass)
-  // change the rating if the user clicks on a different star
-  if (!starClass.contains('active')) {
-  items.forEach( // reset the active class on the star
-  item => item.classList.remove('active')
-  );
-  console.log(e.target.getAttribute("data-rate"));
-  starClass.add('active'); // add active class to the clicked star
-}
-};
+      .then((response) => response.json())
+      .then((data) => (window.location.href = data.redirect))
+      .catch((err) => console.log(err));
+    const starClass = e.target.classList;
+    //   console.log(starClass)
+    // change the rating if the user clicks on a different star
+    if (!starClass.contains('active')) {
+      items.forEach(
+        // reset the active class on the star
+        (item) => item.classList.remove('active')
+      );
+      console.log(e.target.getAttribute('data-rate'));
+      starClass.add('active'); // add active class to the clicked star
+    }
+  };
 </script>

@@ -1,0 +1,55 @@
+<div class="box">
+  <h4 class="shop recipe-name left">INGREDIENT LIST</h4>
+  <div class="shop-container">
+    <button
+      class="recipe-name addButton newIngredientList"
+      onclick="ingredientListAdd()"
+      data-shoplist="<%= recipe._id %>"
+    >
+      <i class="fa fa-plus"></i></button
+    ><input
+      type="text"
+      class="ingredientItemName edit-input"
+      placeholder="Add a new ingredient"
+      value=""
+      disabled
+    />
+  </div>
+  <div class="inner-box">
+    <div class="ingredient-list">
+      <% if (recipe.ingredients.length > 0) { %> <%
+      recipe.ingredients.forEach(ingredient => { %> <% if (ingredient) { %>
+      <p class="recipe-name">
+        <span>
+          <input type="checkbox" />
+        </span>
+        <a class="single" href="/list/<%= recipe._id %>/<%=ingredient._id%>">
+          <span> <%= ingredient%> </span>
+        </a>
+      </p>
+      <%} %> <% }) %> <% } else { %>
+      <p>There are no ingredients to display...</p>
+      <% } %>
+    </div>
+    <!-- <%- include("itemCheckbox.ejs") %> -->
+  </div>
+</div>
+<script>
+  ingredientListAdd = (event) => {
+    const nameInput = document.querySelector('input.ingredientItemName');
+    const editButton = document.querySelector('.newIngredientList');
+    nameInput.disabled = !nameInput.disabled;
+    nameInput.focus();
+    nameInput.addEventListener('blur', (event) => {
+      const newDescription = event.target.value;
+      const endpoint = `/ingredient/${newDescription}/${editButton.dataset.shoplist}`;
+      console.log(endpoint);
+      fetch(endpoint, {
+        method: 'PUT',
+      })
+        .then((response) => response.json())
+        .then((data) => (window.location.href = data.redirect))
+        .catch((err) => console.log(err));
+    });
+  };
+</script>

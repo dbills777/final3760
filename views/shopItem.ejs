@@ -19,7 +19,7 @@
           onclick="editListName()"
         ></button
         ><span>Edit Name</span>
-       <br>
+        <br />
         <input
           type="number"
           class="item-qty edit-input recipe-name"
@@ -38,15 +38,15 @@
       <a class="delete" data-delete="<%= recipe._id %> ">delete</a>
       <% }); %>
     </div>
-    <%- include("./partials/footer.ejs") %>
+
     <script>
       editQuantity = (event) => {
-          const nameInput = document.querySelector('input.item-qty');
-          const editButton = document.querySelector('.qtyEdit');
-          const itemId = document.querySelector('.edit-input');
-          nameInput.disabled = !nameInput.disabled;
-          nameInput.focus();
-          nameInput.addEventListener('blur', (event) => {
+        const nameInput = document.querySelector('input.item-qty');
+        const editButton = document.querySelector('.qtyEdit');
+        const itemId = document.querySelector('.edit-input');
+        nameInput.disabled = !nameInput.disabled;
+        nameInput.focus();
+        nameInput.addEventListener('blur', (event) => {
           const newDescription = event.target.value;
           const endpoint = `/item/${newDescription}/${itemId.dataset.id}/${editButton.dataset.qtyedit}`;
           console.log(endpoint);
@@ -59,12 +59,12 @@
         });
       };
       editListName = (event) => {
-          const nameInput = document.querySelector('input.item-name');
-          const editButton = document.querySelector('.nameEdit');
-          const itemId = document.querySelector('.edit-input');
-          nameInput.disabled = !nameInput.disabled;
-          nameInput.focus();
-          nameInput.addEventListener('blur', (event) => {
+        const nameInput = document.querySelector('input.item-name');
+        const editButton = document.querySelector('.nameEdit');
+        const itemId = document.querySelector('.edit-input');
+        nameInput.disabled = !nameInput.disabled;
+        nameInput.focus();
+        nameInput.addEventListener('blur', (event) => {
           const newDescription = event.target.value;
           const endpoint = `/name/${newDescription}/${itemId.dataset.id}/${editButton.dataset.shopedit}`;
           console.log(endpoint);
