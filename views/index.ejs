@@ -8,18 +8,38 @@
     <li><a href="/sort">Highest</a></li>
     <li><a href="/sortdown">Lowest</a></li>
     <li><a href="/">Most Recent</a></li>
-  </ul>
-</nav>
-    <div class="recipe content">
-  
-      <% if (recipe.length > 0) { %> <% recipe.forEach(recipe => { %>
+
+
+
+    <form>  
+      <div class="form-group">
+        <label for="exampleFormControlSelect1">Search By Category</label>
+        <select class="form-control" id="exampleFormControlSelect1">
+          <% if (recipe) { %> <% recipe.forEach(recipe => { %>
+            <option><%= recipe.category %> </option>        
+            <% }) %> 
+          </select>
+        </div>
+      </form>  
+      <% } else { %>
+        <p>There are no recipes to display...</p>
+        <% } %>
+        
+      </div>   
+    </nav>
+
+
+
+
+
+      <div>
+              <% if (recipe.length > 0) { %> <% recipe.forEach(recipe => { %>
         <%= console.log(recipe)%>
         <a class="single" href="/recipes/<%= recipe._id %>">
           <h3 class="recipe-name"><%= recipe.name %>            
             <div class="details content">   
           <ul class="rating" data-currentrecipe = "<%= recipe._id %> "data-startrate="<%= recipe.rating %>"> 
-            <% for( let index = 0; index < Number(recipe.rating); index++ ) { %>
-            
+            <% for( let index = 0; index < Number(recipe.rating); index++ ) { %>            
               <li class="rating-item"></li>           
             <% } %>
           </ul>

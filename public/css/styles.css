@@ -671,6 +671,10 @@ nav a {
   border-bottom: none;
 }
 
+.form-group {
+  float: right;
+}
+
 footer {
   color: #777;
   text-align: center;

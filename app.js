@@ -82,6 +82,7 @@ app.post('/recipes', (req, res) => {
   console.log(req.body.ingredients, list);
   const recipe = new Rec({
     name: req.body.name,
+    category: req.body.category,
     ingredients: list,
     directions: req.body.directions,
     shopping: shoplist,
