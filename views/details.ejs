@@ -4,8 +4,12 @@
 <body>
   <%- include("./partials/nav.ejs") %>
        
-              <%- include("./partials/rating.ejs") %>       
-              <h1><%= recipe.category %> </h1> 
+    <%- include("./partials/rating.ejs") %>       
+    <p ondblclick = "editCategory()" >
+      <input type="text" class="cat-name  edit-input" value="<%= recipe.category %>" disabled />
+    </p>
+    <button class="cat-editButton fa fa-pencil-square-o fa-1x" data-catedit="<%= recipe._id %> " onclick='editCategory()'></button>
+    <br>
     <p ondblclick = "editDescription()" >
       <input type="text" class="recipe-name edit-input" value="<%= recipe.name %>" disabled />
     </p>
@@ -80,6 +84,24 @@
         const newDescription = event.target.value
 
         const endpoint = `/recipes/${newDescription}/${editButton.dataset.nameedit}`
+        console.log(endpoint);
+        fetch(endpoint, {
+          method: 'PUT',          
+        })
+      .then((response) => response.json())
+      .then((data) => (window.location.href = data.redirect))
+      .catch((err) => console.log(err));
+    });
+  }
+  editCategory = (event)=>{
+      const nameInput = document.querySelector('input.cat-name')
+      const editButton =document.querySelector('.cat-editButton')
+        nameInput.disabled = !nameInput.disabled
+        nameInput.focus()
+        nameInput.addEventListener('blur', (event) => {
+        const newDescription = event.target.value
+
+        const endpoint = `/category/${newDescription}/${editButton.dataset.catedit}`
         console.log(endpoint);
         fetch(endpoint, {
           method: 'PUT',          

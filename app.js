@@ -132,6 +132,17 @@ app.put('/recipes/:update/:id', (req, res) => {
     });
   });
 });
+//UPDATE A SINGLE RECIPE Category
+app.put('/category/:update/:id', (req, res) => {
+  const id = req.params.id;
+  const update = req.params.update;
+  Rec.findByIdAndUpdate(id, { new: true }, (err, rec) => {
+    rec.category = update;
+    rec.save().then((result) => {
+      res.json({ redirect: `/recipes/${id}` });
+    });
+  });
+});
 //UPDATE A SINGLE RECIPE Rating
 app.put('/rate/:update/:id', (req, res) => {
   const id = req.params.id;
