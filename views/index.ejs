@@ -14,7 +14,7 @@
     <div class="form-group">
       <label for="exampleFormControlSelect1">Search By Category</label>
       <select class="form-control" id="exampleFormControlSelect1">
-        <% if (recipe) { %> <% recipe.forEach(recipe => { %>
+        <% if (recipe.length > 0) { %> <% recipe.forEach(recipe => { %>
         <option><%= recipe.category %> </option>        
         <% }) %> 
       </select>
@@ -53,12 +53,6 @@
       <% } %>
     </div>
     <%- include("./partials/footer.ejs") %>
-     <script>
-       const sortByStars= ()=>{
-         console.log('clicked')
-         const endpoint = `/sort`
-          console.log(endpoint);         
-       }
-     </script>
+     
   </body>
 </html>

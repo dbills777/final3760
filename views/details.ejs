@@ -4,7 +4,8 @@
 <body>
   <%- include("./partials/nav.ejs") %>
        
-              <%- include("./partials/rating.ejs") %>        
+              <%- include("./partials/rating.ejs") %>       
+              <h1><%= recipe.category %> </h1> 
     <p ondblclick = "editDescription()" >
       <input type="text" class="recipe-name edit-input" value="<%= recipe.name %>" disabled />
     </p>

@@ -93,10 +93,12 @@ app.post('/recipes', (req, res) => {
     .then((result) => {
       res.redirect('/');
     })
+
     .catch((err) => {
       console.log(err);
     });
 });
+
 //GET ONE SPECIFIC RECIPE
 app.get('/recipes/:id', (req, res) => {
   const id = req.params.id;
