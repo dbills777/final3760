@@ -70,6 +70,44 @@ app.get('/sortdown', (req, res) => {
       console.log(err);
     });
 });
+app.get('/sortcategory/:cat', (req, res) => {
+  const category = req.params.cat;
+  Rec.find()
+    .then((recs) => {
+      let filter = recs.filter(function (e) {
+        return e.category === category;
+      });
+      console.log(filter);
+      return filter;
+    })
+    .then((filter) => {
+      console.log('###################', filter);
+      res.render('index', { title: 'Home', recipe: filter });
+    })
+
+    .catch((err) => {
+      console.log(err);
+    });
+});
+// Sort  CATEGORIES
+// app.put('/sortcategory/:cat', (req, res) => {
+//   const category = req.params.cat;
+//   Rec.find()
+//     .then((recs) => {
+//       console.log('category', category);
+//         sort = recs.filter((rec)=>{
+//           return rec.category ===category
+//         })
+//         console.log("sorted recipes", sort)
+//         res.render('index', { title: 'Home', recipe: sort });
+//     })
+//     .then((sort) => {
+//       res.redirect('/');
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// });
 //POST A NEW RECIPE//
 app.post('/recipes', (req, res) => {
   const list = req.body.ingredients.split(',');
@@ -82,7 +120,7 @@ app.post('/recipes', (req, res) => {
   console.log(req.body.ingredients, list);
   const recipe = new Rec({
     name: req.body.name,
-    category: req.body.category,
+    category: req.body.category.toUpperCase(),
     ingredients: list,
     directions: req.body.directions,
     shopping: shoplist,
@@ -137,7 +175,8 @@ app.put('/category/:update/:id', (req, res) => {
   const id = req.params.id;
   const update = req.params.update;
   Rec.findByIdAndUpdate(id, { new: true }, (err, rec) => {
-    rec.category = update;
+    console.log(rec);
+    rec.category = update.toUpperCase();
     rec.save().then((result) => {
       res.json({ redirect: `/recipes/${id}` });
     });

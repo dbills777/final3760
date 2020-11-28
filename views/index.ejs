@@ -12,11 +12,20 @@
 
   <form>  
     <div class="form-group">
+        <% 
+         const cats =  recipe.map((recipe)=>{
+            return recipe.category.toUpperCase()
+          })
+          let uniqueCats = [...new Set(cats)];
+          // console.log(uniqueCats)
+          %> 
+          
       <label for="exampleFormControlSelect1">Search By Category</label>
-      <select class="form-control" id="exampleFormControlSelect1">
-        <% if (recipe.length > 0) { %> <% recipe.forEach(recipe => { %>
-        <option><%= recipe.category %> </option>        
-        <% }) %> 
+      <select class="form-control" id="cat-selector" onchange="location= this.value">
+        <% if (recipe.length > 0) { %> <% uniqueCats.forEach(category => { %>
+          <option value="/sortcategory/<%=category%> "><%= category %> </option>        
+          <% }) %> 
+          <option value="/">All Categories</option>  
       </select>
     </div>
   </form>  
@@ -53,6 +62,8 @@
       <% } %>
     </div>
     <%- include("./partials/footer.ejs") %>
-     
+     <script>
+
+</script>
   </body>
 </html>
