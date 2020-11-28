@@ -49,9 +49,7 @@ app.get('/sort', (req, res) => {
     .then((recs) => {
       res.render('index', { title: 'Home', recipe: recs });
     })
-    .then((result) => {
-      res.redirect('/');
-    })
+
     .catch((err) => {
       console.log(err);
     });
@@ -63,13 +61,12 @@ app.get('/sortdown', (req, res) => {
     .then((recs) => {
       res.render('index', { title: 'Home', recipe: recs });
     })
-    .then((result) => {
-      res.redirect('/');
-    })
+
     .catch((err) => {
       console.log(err);
     });
 });
+//category Sort
 app.get('/sortcategory/:cat', (req, res) => {
   const category = req.params.cat;
   Rec.find()
@@ -77,11 +74,9 @@ app.get('/sortcategory/:cat', (req, res) => {
       let filter = recs.filter(function (e) {
         return e.category === category;
       });
-      console.log(filter);
       return filter;
     })
     .then((filter) => {
-      console.log('###################', filter);
       res.render('index', { title: 'Home', recipe: filter });
     })
 
@@ -89,26 +84,7 @@ app.get('/sortcategory/:cat', (req, res) => {
       console.log(err);
     });
 });
-// Sort  CATEGORIES
-// app.put('/sortcategory/:cat', (req, res) => {
-//   const category = req.params.cat;
-//   Rec.find()
-//     .then((recs) => {
-//       console.log('category', category);
-//         sort = recs.filter((rec)=>{
-//           return rec.category ===category
-//         })
-//         console.log("sorted recipes", sort)
-//         res.render('index', { title: 'Home', recipe: sort });
-//     })
-//     .then((sort) => {
-//       res.redirect('/');
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// });
-//POST A NEW RECIPE//
+
 app.post('/recipes', (req, res) => {
   const list = req.body.ingredients.split(',');
   const shoplist = list.map((item) => {
