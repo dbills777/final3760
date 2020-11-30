@@ -15,11 +15,11 @@
     </p>
         <button class="editButton fa fa-pencil-square-o fa-1x" data-nameedit="<%= recipe._id %> " onclick='editDescription()'></button>
         <br>
-
-        <textarea id="body" class="recipe-name directions edit-input" rows = "4" name="directions" required disabled><%= recipe.directions %></textarea>
+        <form action=""></form>
+        <div> <textarea id="body" class="recipe-name directions edit-input" rows = "4" name="directions" required disabled><%= recipe.directions %></textarea>
         <span>
               Edit
-        </span>
+        </span> </div>
         <button class="editButton recipe-name descButton fa fa-pencil-square-o fa-1x" data-directions="<%= recipe._id %> " onclick='editDirections()'></button>    
     <a class="delete" data-delete="<%= recipe._id %> ">delete</a>      
   </div>
