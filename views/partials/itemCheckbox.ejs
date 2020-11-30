@@ -4,26 +4,26 @@
     <ul>
       <% if (ingredient.complete) { %>
       <li>
-        <input 
+        <input
         data-check="<%= ingredient %>"
         data-list="<%= ingredient.id %>"
         type="checkbox"
         class="selected"
-        id="select ingredient" 
-        name="ingredient" 
+        id="select ingredient"
+        name="ingredient"
         checked
         onchange="addToShoppingList(event)"
         />
         <% } else { %>
       <li>
-        <input 
+        <input
         data-check="<%= ingredient %>"
         data-list="<%= ingredient._id %>"
         type="checkbox"
         class="selected"
-        id="select ingredient" 
-        name="ingredient" 
-        unchecked 
+        id="select ingredient"
+        name="ingredient"
+        unchecked
         onchange="addToShoppingList(event)"/>
         <% } %>
         <%= ingredient.item%></p>
@@ -42,7 +42,7 @@
           const currentItemId = event.target.dataset.list
           const endpoint = `/checkbox/${currentItemId}/${editButton.dataset.nameedit}`;
           fetch(endpoint, {
-          method: 'PUT',          
+          method: 'PUT',
         })
       .then((response) => response.json())
       .then((data) => (window.location.href = data.redirect))

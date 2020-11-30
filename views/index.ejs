@@ -7,57 +7,57 @@
   <ul>
     <li><a href="/sort">Highest</a></li>
     <li><a href="/sortdown">Lowest</a></li>
-    <li><a href="/">Most Recent</a></li>    
+    <li><a href="/">Most Recent</a></li>
   </nav>
 
-  <form>  
+  <form>
     <div class="form-group">
-        <% 
+        <%
          const cats =  recipe.map((recipe)=>{
             return recipe.category.toUpperCase()
           })
           let uniqueCats = [...new Set(cats)];
-          %> 
-          
+          %>
+
       <label for="exampleFormControlSelect1">Search By Category</label>
       <select class="form-control" id="cat-selector" onchange="location= this.value">
         <% if (recipe.length > 0) { %> <% uniqueCats.forEach(category => { %>
-          <option value="/sortcategory/<%=category%> "><%= category %> </option>        
-          <% }) %> 
-          <option value="/">All Categories</option>  
+          <option value="/sortcategory/<%=category%> "><%= category %> </option>
+          <% }) %>
+          <option value="/">All Categories</option>
       </select>
     </div>
-  </form>  
+  </form>
         <% } else { %>
         <p>There are no Categories</p>
         <% } %>
   <div>
     <% if (recipe.length > 0) { %> <% recipe.forEach(recipe => { %>
     <a class="single" href="/recipes/<%= recipe._id %>">
-    <h3 class="recipe-name"><%= recipe.name %> 
+    <h3 class="recipe-name"><%= recipe.name %>
       <br>
-      Category: <%= recipe.category %> 
-      
-    <div class="details content">   
-      <ul class="rating" data-currentrecipe = "<%= recipe._id %> "data-startrate="<%=   recipe.rating %>"> 
-         <% for( let index = 0; index < Number(recipe.rating); index++ ) { %>            
-              <li class="rating-item"></li>           
+      Category: <%= recipe.category %>
+
+    <div class="details content">
+      <ul class="rating" data-currentrecipe = "<%= recipe._id %> "data-startrate="<%=   recipe.rating %>">
+         <% for( let index = 0; index < Number(recipe.rating); index++ ) { %>
+              <li class="rating-item"></li>
          <% } %>
       </ul>
-    </div> 
-   
+    </div>
+
       </h3>
-      <h4 class="recipe-date">Created: <%= recipe.createdAt.toLocaleString() %> </h4>    
-      <h4 class="recipe-date">Last Edit: <%= recipe.updatedAt.toLocaleString() %></h4>    
+      <h4 class="recipe-date">Created: <%= recipe.createdAt.toLocaleString() %> </h4>
+      <h4 class="recipe-date">Last Edit: <%= recipe.updatedAt.toLocaleString() %></h4>
       <ul>
         <% if (recipe.ingredients.length > 0) { %> <% recipe.ingredients.forEach(ingredient => { %>
-        <% if (ingredient) { %>            
+        <% if (ingredient) { %>
           <li><%=ingredient %></li>
-            <%}  %>    
+            <%}  %>
             <% }) %> <% } else { %>
           <p>Add some Ingredients</p>
-            <% } %>      
-       </ul>    
+            <% } %>
+       </ul>
       <div class="recipe-directions"><h2>Directions:</h2> <%= recipe.directions %></div>
       </a>
       <% }) %> <% } else { %>

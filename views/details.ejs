@@ -3,8 +3,8 @@
 
 <body>
   <%- include("./partials/nav.ejs") %>
-       
-    <%- include("./partials/rating.ejs") %>       
+
+    <%- include("./partials/rating.ejs") %>
     <p ondblclick = "editCategory()" >
       <input type="text" class="cat-name  edit-input" value="<%= recipe.category %>" disabled />
     </p>
@@ -20,8 +20,8 @@
         <span>
               Edit
         </span> </div>
-        <button class="editButton recipe-name descButton fa fa-pencil-square-o fa-1x" data-directions="<%= recipe._id %> " onclick='editDirections()'></button>    
-    <a class="delete" data-delete="<%= recipe._id %> ">delete</a>      
+        <button class="editButton recipe-name descButton fa fa-pencil-square-o fa-1x" data-directions="<%= recipe._id %> " onclick='editDirections()'></button>
+    <a class="delete" data-delete="<%= recipe._id %> ">delete</a>
   </div>
     <div class="box">
       <h4 class="shop recipe-name left">SHOPPING LIST</h4>
@@ -30,30 +30,30 @@
       </div>
       <div class="inner-box">
       <div class="ingredient-list">
-       
-        <% if (recipe.shopping.length > 0) { %> <% recipe.shopping.forEach(ingredient => { %>    
-          <% if (ingredient.complete) { %>            
-            <p class="recipe-name">              
+
+        <% if (recipe.shopping.length > 0) { %> <% recipe.shopping.forEach(ingredient => { %>
+          <% if (ingredient.complete) { %>
+            <p class="recipe-name">
               <span>
               <input type="checkbox">
-              </span>                
+              </span>
               <a class="single" href="/list/<%= recipe._id %>/<%=ingredient._id%>">
                 <span>
-                <%= ingredient.item%> 
-                </span>                
+                <%= ingredient.item%>
+                </span>
               </a>
               qty:
               <a class="single" href="/list/<%= recipe._id %>/<%=ingredient._id%>">
                 <span>
-                  <%= ingredient.quantity%> 
+                  <%= ingredient.quantity%>
                 </span>
-              </a>              
+              </a>
             </a>
           </p>
-    <%}  %>    
+    <%}  %>
     <% }) %> <% } else { %>
       <p>There are no ingredients to display...</p>
-      <% } %>      
+      <% } %>
     </div>
     <%- include("./partials/itemCheckbox.ejs") %>
     </div>
@@ -61,9 +61,9 @@
 </div>
 <%- include("./partials/ingredients.ejs") %>
 </div>
-  
+
   <%- include("./partials/footer.ejs") %>
-  <script>    
+  <script>
         const deletebtn = document.querySelector('a.delete')
         deletebtn.addEventListener('click', (e) => {
         const endpoint = `/recipes/${deletebtn.dataset.delete}`;
@@ -74,7 +74,7 @@
           .then((data) => window.location.href = data.redirect)
           .catch(err => console.log(err))
         })
-      
+
   editDescription = (event)=>{
       const nameInput = document.querySelector('input.recipe-name')
       const editButton =document.querySelector('.editButton')
@@ -86,7 +86,7 @@
         const endpoint = `/recipes/${newDescription}/${editButton.dataset.nameedit}`
         console.log(endpoint);
         fetch(endpoint, {
-          method: 'PUT',          
+          method: 'PUT',
         })
       .then((response) => response.json())
       .then((data) => (window.location.href = data.redirect))
@@ -104,7 +104,7 @@
         const endpoint = `/category/${newDescription}/${editButton.dataset.catedit}`
         console.log(endpoint);
         fetch(endpoint, {
-          method: 'PUT',          
+          method: 'PUT',
         })
       .then((response) => response.json())
       .then((data) => (window.location.href = data.redirect))
@@ -121,7 +121,7 @@
         const endpoint = `/directions/${newDescription}/${editButton.dataset.directions}`
         console.log(endpoint);
         fetch(endpoint, {
-          method: 'PUT',          
+          method: 'PUT',
         })
       .then((response) => response.json())
       .then((data) => (window.location.href = data.redirect))
@@ -133,12 +133,12 @@
         const editButton =document.querySelector('.newShopList')
         nameInput.disabled = !nameInput.disabled
         nameInput.focus()
-        nameInput.addEventListener('blur', (event) => {          
-          const newDescription = event.target.value  
+        nameInput.addEventListener('blur', (event) => {
+          const newDescription = event.target.value
           const endpoint = `/shoplist/${newDescription}/${editButton.dataset.shoplist}`
           console.log(endpoint);
           fetch(endpoint, {
-            method: 'PUT',          
+            method: 'PUT',
           })
         .then((response) => response.json())
         .then((data) => (window.location.href = data.redirect))
