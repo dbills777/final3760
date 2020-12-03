@@ -386,7 +386,6 @@ template {
 body {
   max-width: 1200px;
   margin: 20px auto;
-  padding: 0 20px;
   font-family: 'Noto Serif', serif;
   max-width: 1200px;
   background-color: #4E5D6A;
@@ -508,6 +507,11 @@ textarea.recipe-name {
 }
 
 .recipe-name {
+  color: #777;
+  font-size: 2.5rem;
+}
+
+.cat-name {
   color: #777;
   font-size: 2.5rem;
 }

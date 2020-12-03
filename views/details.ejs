@@ -4,16 +4,17 @@
 <body>
   <%- include("./partials/nav.ejs") %>
 
+  <p ondblclick = "editCategory()" class="cat-data" data-catedit= "<%= recipe._id %> " >
+    Category:
+    <input type="text" class="cat-name  edit-input " value="<%= recipe.category %>" disabled />
+  </p>
     <%- include("./partials/rating.ejs") %>
-    <p ondblclick = "editCategory()" >
-      <input type="text" class="cat-name  edit-input" value="<%= recipe.category %>" disabled />
-    </p>
-    <button class="cat-editButton fa fa-pencil-square-o fa-1x" data-catedit="<%= recipe._id %> " onclick='editCategory()'></button>
     <br>
-    <p ondblclick = "editDescription()" >
-      <input type="text" class="recipe-name edit-input" value="<%= recipe.name %>" disabled />
+    <p ondblclick = "editDescription()"class="desc-data" data-nameedit="<%= recipe._id %> " >
+      Recipe:
+      <input type="text" class="recipe-name edit-input " value="<%= recipe.name %>" disabled />
     </p>
-        <button class="editButton fa fa-pencil-square-o fa-1x" data-nameedit="<%= recipe._id %> " onclick='editDescription()'></button>
+        <!-- <button class="editButton fa fa-pencil-square-o fa-1x" data-nameedit="<%= recipe._id %> " onclick='editDescription()'></button> -->
         <br>
         <form action=""></form>
         <div> <textarea id="body" class="recipe-name directions edit-input" rows = "4" name="directions" required disabled><%= recipe.directions %></textarea>
@@ -77,13 +78,13 @@
 
   editDescription = (event)=>{
       const nameInput = document.querySelector('input.recipe-name')
-      const editButton =document.querySelector('.editButton')
+      const descData =document.querySelector('.desc-data')
         nameInput.disabled = !nameInput.disabled
         nameInput.focus()
         nameInput.addEventListener('blur', (event) => {
         const newDescription = event.target.value
 
-        const endpoint = `/recipes/${newDescription}/${editButton.dataset.nameedit}`
+        const endpoint = `/recipes/${newDescription}/${descData.dataset.nameedit}`
         console.log(endpoint);
         fetch(endpoint, {
           method: 'PUT',
@@ -95,13 +96,13 @@
   }
   editCategory = (event)=>{
       const nameInput = document.querySelector('input.cat-name')
-      const editButton =document.querySelector('.cat-editButton')
+      const catData =document.querySelector('.cat-data')
         nameInput.disabled = !nameInput.disabled
         nameInput.focus()
         nameInput.addEventListener('blur', (event) => {
         const newDescription = event.target.value
 
-        const endpoint = `/category/${newDescription}/${editButton.dataset.catedit}`
+        const endpoint = `/category/${newDescription}/${catData.dataset.catedit}`
         console.log(endpoint);
         fetch(endpoint, {
           method: 'PUT',
