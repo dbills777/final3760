@@ -34,7 +34,7 @@
   <div>
     <% if (recipe.length > 0) { %> <% recipe.forEach(recipe => { %>
     <a class="single" href="/recipes/<%= recipe._id %>">
-    <h3 class="recipe-name"><%= recipe.name %>
+    <h3 class="recipe-name">Recipe Name: <%= recipe.name %>
       <br>
       Category: <%= recipe.category %>
 
