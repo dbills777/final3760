@@ -5,7 +5,7 @@ body {
   // padding: 0 20px;
   font-family: 'Noto Serif', serif;
   max-width: 1200px;
-  background-color: $background-color;
+  background-color: $background;
 }
 p,
 h1,
@@ -223,11 +223,4 @@ textarea.recipe-name {
 .inner-box {
   display: flex;
   justify-content: space-between;
-  // background-color: pink;
 }
-// .left {
-//   float: left;
-// }
-// .right {
-//   float: right;
-// }
