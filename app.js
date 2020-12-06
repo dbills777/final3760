@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const Rec = require('./recipeModel');
+const { result } = require('lodash');
 const app = express();
 const port = 3000;
 mongoose.set('useFindAndModify', false);
@@ -135,6 +136,7 @@ app.delete('/recipes/:id', (req, res) => {
       console.log(err);
     });
 });
+
 //UPDATE A SINGLE RECIPE NAME
 app.put('/recipes/:update/:id', (req, res) => {
   const id = req.params.id;
@@ -204,12 +206,26 @@ app.put('/item/:update/:ing/:id', (req, res) => {
   const update = req.params.update;
   const ingredient = req.params.ing;
   Rec.findByIdAndUpdate(id, ingredient, { new: true }, (err, rec) => {
+    console.log(rec);
     rec.shopping.filter((item) => {
       if (item._id == ingredient) {
         item.quantity = update;
       }
     });
 
+    rec.save().then((result) => {
+      res.json({ redirect: `/recipes/${id}` });
+    });
+  });
+});
+//DELETE ONE SHOPPING ITEM
+app.put('/shopitem/:ing/:id', (req, res) => {
+  const id = req.params.id;
+  const update = req.params.update;
+  const ingredient = req.params.ing;
+  console.log('rec: ', id, 'ing', ingredient);
+  Rec.findByIdAndUpdate(id, ingredient, { new: true }, (err, rec) => {
+    rec.shopping.pull({ _id: ingredient });
     rec.save().then((result) => {
       res.json({ redirect: `/recipes/${id}` });
     });

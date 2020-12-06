@@ -18,7 +18,6 @@
           })
           let uniqueCats = [...new Set(cats)];
           %>
-
       <label for="exampleFormControlSelect1">Search By Category</label>
       <select class="form-control" id="cat-selector" onchange="location= this.value">
         <% if (recipe.length > 0) { %> <% uniqueCats.forEach(category => { %>
@@ -34,9 +33,12 @@
   <div>
     <% if (recipe.length > 0) { %> <% recipe.forEach(recipe => { %>
     <a class="single" href="/recipes/<%= recipe._id %>">
-    <h3 class="recipe-name">Recipe Name: <%= recipe.name %>
+    <h3 class="headerSize">Recipe Name: <%= recipe.name %>
+    </h3>
       <br>
-      Category: <%= recipe.category %>
+      <h3 class="headerSize">
+        Category: <%= recipe.category %>
+      </h3>
 
     <div class="details content">
       <ul class="rating" data-currentrecipe = "<%= recipe._id %> "data-startrate="<%=   recipe.rating %>">
@@ -58,6 +60,7 @@
           <p>Add some Ingredients</p>
             <% } %>
        </ul>
+       <br>
       <div class="recipe-directions"><h2>Directions:</h2> <%= recipe.directions %></div>
       </a>
       <% }) %> <% } else { %>

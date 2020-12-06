@@ -35,11 +35,24 @@
       ></button
       ><span>Edit QTY</span>
       <p class="recipe-directions">Directions: <%= recipe.directions %></p>
-      <a class="delete" data-delete="<%= recipe._id %> ">delete</a>
+      <a class="delete" data-delete="<%= recipe._id %>" onclick="deleteShopItem()">delete</a>
       <% }); %>
     </div>
 
     <script>
+         deleteShopItem = (event) => {
+        const editButton = document.querySelector('.qtyEdit');
+        const itemId = document.querySelector('.edit-input');
+          const endpoint = `/shopitem/${itemId.dataset.id}/${editButton.dataset.qtyedit}`;
+          console.log('SHOPDELETE', endpoint);
+          fetch(endpoint, {
+            method: 'PUT',
+          })
+            .then((response) => response.json())
+            .then((data) => (window.location.href = data.redirect))
+            .catch((err) => console.log(err));
+        // });
+      };
       editQuantity = (event) => {
         const nameInput = document.querySelector('input.item-qty');
         const editButton = document.querySelector('.qtyEdit');

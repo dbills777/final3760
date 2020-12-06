@@ -11,7 +11,7 @@ html {
   /* 1 */
   -webkit-text-size-adjust: 100%;
   /* 2 */
-  font-size: 80%;
+  font-size: 62.5%;
 }
 
 /* Sections
@@ -658,6 +658,10 @@ textarea.recipe-name {
   cursor: pointer;
 }
 
+.headerSize {
+  font-size: 2rem;
+}
+
 .shop {
   display: flex;
 }
@@ -670,14 +674,15 @@ textarea.recipe-name {
 
 .shop-container {
   padding-left: 0;
-  font-size: 2rem;
+  font-size: 1rem;
   padding-bottom: 1rem;
 }
 
-.box {
+.box1 {
   background-color: #475057;
   padding: 1rem;
   border-radius: 10px;
+  background-color: red;
 }
 
 .inner-box {

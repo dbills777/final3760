@@ -4,13 +4,13 @@
 <body>
   <%- include("./partials/nav.ejs") %>
 
-  <p ondblclick = "editCategory()" class="cat-data" data-catedit= "<%= recipe._id %> " >
+  <p ondblclick = "editCategory()" class="cat-data headerSize" data-catedit= "<%= recipe._id %> " >
     Category:
     <input type="text" class="cat-name  edit-input " value="<%= recipe.category %>" disabled />
   </p>
     <%- include("./partials/rating.ejs") %>
     <br>
-    <p ondblclick = "editDescription()"class="desc-data" data-nameedit="<%= recipe._id %> " >
+    <p ondblclick = "editDescription()"class="desc-data headerSize" data-nameedit="<%= recipe._id %> " >
       Recipe:
       <input type="text" class="recipe-name edit-input " value="<%= recipe.name %>" disabled />
     </p>
@@ -59,7 +59,6 @@
     <%- include("./partials/itemCheckbox.ejs") %>
     </div>
   </div>
-</div>
 <%- include("./partials/ingredients.ejs") %>
 </div>
 
