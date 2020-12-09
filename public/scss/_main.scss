@@ -19,6 +19,15 @@ ul {
   color: rgb(211, 211, 211);
 }
 
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-items: center;
+}
+.recipe-group {
+  display: flex;
+  max-width: 50vw;
+}
 h2 {
   margin-bottom: 40px;
 }
@@ -201,7 +210,7 @@ textarea.recipe-name {
   background-color: $bright-green;
   cursor: pointer;
 }
-.headerSize{
+.headerSize {
   font-size: 2rem;
 }
 .shop {
@@ -210,7 +219,7 @@ textarea.recipe-name {
 .box .recipe-name {
   padding: 0;
   margin: 0;
-  padding-bottom: 5px ;
+  padding-bottom: 5px;
 }
 .shop-container {
   padding-left: 0;
@@ -222,7 +231,6 @@ textarea.recipe-name {
   padding: 1rem;
   border-radius: 10px;
   background-color: red;
-
 }
 
 .inner-box {

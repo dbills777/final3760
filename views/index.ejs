@@ -9,10 +9,9 @@
     <li><a href="/sortdown">Lowest</a></li>
     <li><a href="/">Most Recent</a></li>
   </nav>
-
   <form>
     <div class="form-group">
-        <%
+      <%
          const cats =  recipe.map((recipe)=>{
             return recipe.category.toUpperCase()
           })
@@ -24,13 +23,15 @@
           <option value="/sortcategory/<%=category%> "><%= category %> </option>
           <% }) %>
           <option value="/">All Categories</option>
-      </select>
-    </div>
-  </form>
-        <% } else { %>
-        <p>There are no Categories</p>
-        <% } %>
-  <div>
+        </select>
+      </div>
+    </form>
+    <% } else { %>
+      <p>There are no Categories</p>
+      <% } %>
+      <main>
+        <div class="recipe-group">
+      <div>
     <% if (recipe.length > 0) { %> <% recipe.forEach(recipe => { %>
     <a class="single" href="/recipes/<%= recipe._id %>">
     <h3 class="headerSize">Recipe Name: <%= recipe.name %>
@@ -40,7 +41,7 @@
         Category: <%= recipe.category %>
       </h3>
 
-    <div class="details content">
+    <div class="details-content">
       <ul class="rating" data-currentrecipe = "<%= recipe._id %> "data-startrate="<%=   recipe.rating %>">
          <% for( let index = 0; index < Number(recipe.rating); index++ ) { %>
               <li class="rating-item"></li>
@@ -67,6 +68,10 @@
       <p>There are no recipes to display...</p>
       <% } %>
     </div>
+  </div>
+
+</main>
+
     <%- include("./partials/footer.ejs") %>
      <script>
 

@@ -453,6 +453,17 @@ ul {
   color: lightgray;
 }
 
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-items: center;
+}
+
+.recipe-group {
+  display: flex;
+  max-width: 50vw;
+}
+
 h2 {
   margin-bottom: 40px;
 }
