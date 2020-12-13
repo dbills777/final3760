@@ -453,17 +453,6 @@ ul {
   color: lightgray;
 }
 
-main {
-  display: flex;
-  flex-wrap: wrap;
-  justify-items: center;
-}
-
-.recipe-group {
-  display: flex;
-  max-width: 50vw;
-}
-
 h2 {
   margin-bottom: 40px;
 }
@@ -483,8 +472,9 @@ h3 {
 .recipe-container {
   display: flex;
   justify-content: space-around;
-  width: 90vw;
-  align-items: center;
+  width: 50vw;
+  justify-items: center;
+  max-height: 200px;
 }
 
 .ingredient-list ul li {
@@ -615,6 +605,16 @@ textarea.recipe-name {
 .edit:hover {
   cursor: pointer;
   box-shadow: 1px 2px 3px #7bed8d;
+}
+
+.right {
+  display: block;
+}
+
+.index-div {
+  display: flex;
+  max-width: 50%;
+  margin: 1rem;
 }
 
 .edit-input {

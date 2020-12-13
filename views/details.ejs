@@ -1,29 +1,30 @@
 <html lang="en">
 <%- include("./partials/head.ejs") %>
-
 <body>
   <%- include("./partials/nav.ejs") %>
-
   <p ondblclick = "editCategory()" class="cat-data headerSize" data-catedit= "<%= recipe._id %> " >
     Category:
     <input type="text" class="cat-name  edit-input " value="<%= recipe.category %>" disabled />
   </p>
     <%- include("./partials/rating.ejs") %>
-    <br>
-    <p ondblclick = "editDescription()"class="desc-data headerSize" data-nameedit="<%= recipe._id %> " >
+  <br>
+  <p ondblclick = "editDescription()"class="desc-data headerSize" data-nameedit="<%= recipe._id %> " >
       Recipe:
-      <input type="text" class="recipe-name edit-input " value="<%= recipe.name %>" disabled />
-    </p>
-        <!-- <button class="editButton fa fa-pencil-square-o fa-1x" data-nameedit="<%= recipe._id %> " onclick='editDescription()'></button> -->
-        <br>
-        <form action=""></form>
-        <div> <textarea id="body" class="recipe-name directions edit-input" rows = "4" name="directions" required disabled><%= recipe.directions %></textarea>
-        <span>
-              Edit
-        </span> </div>
-        <button class="editButton recipe-name descButton fa fa-pencil-square-o fa-1x" data-directions="<%= recipe._id %> " onclick='editDirections()'></button>
+  <input type="text" class="recipe-name edit-input " value="<%= recipe.name %>" disabled />
+  </p>
+  <br>
+    <div>
+      <form action="">
+        <textarea id="body" class="recipe-name directions edit-input" rows = "4" name="directions" required disabled><%= recipe.directions %>
+        </textarea>
+      </form>
+      <span>
+      Edit
+      </span>
+    </div>
+    <button class="editButton recipe-name descButton fa fa-pencil-square-o fa-1x" data-directions="<%= recipe._id %> " onclick='editDirections()'></button>
     <a class="delete" data-delete="<%= recipe._id %> ">delete</a>
-  </div>
+    </div>
     <div class="box">
       <h4 class="shop recipe-name left">SHOPPING LIST</h4>
       <div class="shop-container">
@@ -35,9 +36,9 @@
         <% if (recipe.shopping.length > 0) { %> <% recipe.shopping.forEach(ingredient => { %>
           <% if (ingredient.complete) { %>
             <p class="recipe-name">
-              <span>
+              <!-- <span>
               <input type="checkbox">
-              </span>
+              </span> -->
               <a class="single" href="/list/<%= recipe._id %>/<%=ingredient._id%>">
                 <span>
                 <%= ingredient.item%>
@@ -145,7 +146,6 @@
         .catch((err) => console.log(err));
     });
   }
-
   </script>
 </body>
 
