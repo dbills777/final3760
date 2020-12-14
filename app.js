@@ -299,6 +299,41 @@ app.get('/list/:id/:ing', (req, res) => {
       console.log(err);
     });
 });
+// GET A ingredient LIST ITEM page
+app.get('/deleteingredient/:id/:ing', (req, res) => {
+  // console.log(req.params);
+  const id = req.params.id;
+  const ing = req.params;
+  Rec.findById(id)
+    .then((result) => {
+      const filtershop = result.ingredients.filter((item) => {
+        // console.log(item);
+        return item == ing.ing;
+      });
+      res.render('ingredientItem', {
+        single: filtershop,
+        recipe: result,
+        title: 'Edit Item Details',
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+//DELETE ONE ingredient ITEM
+app.put('/ingdelete/:ing/:id', (req, res) => {
+  const id = req.params.id;
+  // const update = req.params.update;
+  const ingredient = req.params.ing;
+  console.log('recdfsafdsfa: ', 'ing', ingredient);
+  Rec.findByIdAndUpdate(id, ingredient, { new: true }, (err, rec) => {
+    console.log(rec.ingredients);
+    rec.ingredients.pull(ingredient);
+    rec.save().then((result) => {
+      res.json({ redirect: `/recipes/${id}` });
+    });
+  });
+});
 
 //GET CREATE NEW RECIPE PAGE IN NAV
 app.get('/create', (req, res) => {

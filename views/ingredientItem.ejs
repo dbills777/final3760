@@ -9,8 +9,8 @@
         <input
           type="text"
           class="item-name edit-input recipe-name"
-          value="<%= shopitem.item %>"
-          data-id="<%= shopitem._id %>"
+          value="<%= shopitem %>"
+          data-id="<%= shopitem %>"
           disabled
         />
         <button
@@ -19,7 +19,7 @@
           onclick="editListName()"
         ></button
         ><span>Edit Name</span>
-        <br />
+          <br />
         <input
           type="number"
           class="item-qty edit-input recipe-name"
@@ -48,8 +48,9 @@
       deleteShopItem = (event) => {
         const editButton = document.querySelector('.qtyEdit');
         const itemId = document.querySelector('.edit-input');
-        const endpoint = `/shopitem/${itemId.dataset.id}/${editButton.dataset.qtyedit}`;
-        console.log('SHOPDELETE', endpoint);
+        console.log(itemId.dataset.id.trim())
+        const endpoint = `/ingdelete/${itemId.dataset.id.trim()}/${editButton.dataset.qtyedit}`;
+        console.log('ingredientdelete', endpoint);
         fetch(endpoint, {
           method: 'PUT',
         })
