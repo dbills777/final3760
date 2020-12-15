@@ -2,7 +2,7 @@
   "name": "final3760",
   "version": "1.0.0",
   "description": "Final Project for DGM 3760.",
-  "main": "index.js",
+  "main": "index.ejs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"

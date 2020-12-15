@@ -3,9 +3,9 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 // const morgan = require('morgan');
 const Rec = require('./recipeModel');
-const { result } = require('lodash');
+// const { result } = require('lodash');
 const app = express();
-app.use(express.static('public'));
+app.use(express.static('views'));
 
 const port = 3000;
 mongoose.set('useFindAndModify', false);
