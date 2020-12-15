@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 require('dotenv').config();
 
 mongoose
-  .connect(`${process.env.MONGOURL}`, {
+  .connect('mongodb+srv://dgmFinal:<password>@cluster0.iorhc.mongodb.net/<dbname>?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
