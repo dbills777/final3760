@@ -577,8 +577,8 @@ textarea.recipe-name {
 
 .delete {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 400px;
+  right: 100px;
   border: 1px solid #7bed8d;
   border-radius: 50%;
   padding: 10px;
