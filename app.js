@@ -23,8 +23,7 @@ mongoose
     )
   )
   .catch((err) => console.log(err));
-
-
+  
 //Set Veiw Engine
 app.set('view engine', 'ejs');
 
