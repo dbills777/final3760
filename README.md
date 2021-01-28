@@ -8,7 +8,7 @@ Mongoose
 Host - Heroku
 - As a user I need to be able to add new recipes.
 - As a user I need to be able to delete recipes.
-- As a user I need to be able to View a list of recipes.-
+- As a user I need to be able to View a list of recipes.
 - As a user I need to be able to add ingredients to a recipe.
 - As a user I need to add directions to a recipe.
 - As a user I need to edit directions to a recipe .
